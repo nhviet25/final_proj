@@ -1,0 +1,1081 @@
+
+// Library name: datn
+// Cell name: sram_cell
+// View name: schematic
+subckt sram_cell RWL REN RENB RWLB_N RWLB_P RWL_N RWL_P VDD VSS WBL WBLB \
+        WWL
+    M8 (net025 Qbar RWLB_N VSS) nch l=60n w=300n m=1 nf=1 sd=200n \
+        ad=5.25e-14 as=5.25e-14 pd=950.0n ps=950.0n nrd=0.333333 \
+        nrs=0.333333 sa=175.00n sb=175.00n sca=0 scb=0 scc=0
+    M7 (net025 Q RWL_N VSS) nch l=60n w=300n m=1 nf=1 sd=200n ad=5.25e-14 \
+        as=5.25e-14 pd=950.0n ps=950.0n nrd=0.333333 nrs=0.333333 \
+        sa=175.00n sb=175.00n sca=0 scb=0 scc=0
+    M11 (RWL REN net025 VSS) nch l=60n w=300n m=1 nf=1 sd=200n ad=5.25e-14 \
+        as=5.25e-14 pd=950.0n ps=950.0n nrd=0.333333 nrs=0.333333 \
+        sa=175.00n sb=175.00n sca=0 scb=0 scc=0
+    M5 (WBLB WWL Qbar VSS) nch l=60n w=250.0n m=1 nf=1 sd=200n \
+        ad=4.375e-14 as=4.375e-14 pd=850.0n ps=850.0n nrd=0.4 nrs=0.4 \
+        sa=175.00n sb=175.00n sca=0 scb=0 scc=0
+    M4 (Q WWL WBL VSS) nch l=60n w=250.0n m=1 nf=1 sd=200n ad=4.375e-14 \
+        as=4.375e-14 pd=850.0n ps=850.0n nrd=0.4 nrs=0.4 sa=175.00n \
+        sb=175.00n sca=0 scb=0 scc=0
+    M3 (Q Qbar VSS VSS) nch l=60n w=300n m=1 nf=1 sd=200n ad=5.25e-14 \
+        as=5.25e-14 pd=950.0n ps=950.0n nrd=0.333333 nrs=0.333333 \
+        sa=175.00n sb=175.00n sca=0 scb=0 scc=0
+    M0 (Qbar Q VSS VSS) nch l=60n w=300n m=1 nf=1 sd=200n ad=5.25e-14 \
+        as=5.25e-14 pd=950.0n ps=950.0n nrd=0.333333 nrs=0.333333 \
+        sa=175.00n sb=175.00n sca=0 scb=0 scc=0
+    M12 (RWL REN VDD VDD) pch l=60n w=800n m=1 nf=1 sd=200n ad=1.4e-13 \
+        as=1.4e-13 pd=1.95u ps=1.95u nrd=0.125 nrs=0.125 sa=175.00n \
+        sb=175.00n sca=0 scb=0 scc=0
+    M9 (net021 Qbar RWLB_P VDD) pch l=60n w=180.0n m=1 nf=1 sd=200n \
+        ad=3.15e-14 as=3.15e-14 pd=710.0n ps=710.0n nrd=0.555556 \
+        nrs=0.555556 sa=175.00n sb=175.00n sca=0 scb=0 scc=0
+    M10 (net021 RENB RWL VDD) pch l=60n w=180.0n m=1 nf=1 sd=200n \
+        ad=3.15e-14 as=3.15e-14 pd=710.0n ps=710.0n nrd=0.555556 \
+        nrs=0.555556 sa=175.00n sb=175.00n sca=0 scb=0 scc=0
+    M6 (net021 Q RWL_P VDD) pch l=60n w=180.0n m=1 nf=1 sd=200n \
+        ad=3.15e-14 as=3.15e-14 pd=710.0n ps=710.0n nrd=0.555556 \
+        nrs=0.555556 sa=175.00n sb=175.00n sca=0 scb=0 scc=0
+    M2 (Q Qbar VDD VDD) pch l=60n w=180.0n m=1 nf=1 sd=200n ad=3.15e-14 \
+        as=3.15e-14 pd=710.0n ps=710.0n nrd=0.555556 nrs=0.555556 \
+        sa=175.00n sb=175.00n sca=0 scb=0 scc=0
+    M1 (Qbar Q VDD VDD) pch l=60n w=180.0n m=1 nf=1 sd=200n ad=3.15e-14 \
+        as=3.15e-14 pd=710.0n ps=710.0n nrd=0.555556 nrs=0.555556 \
+        sa=175.00n sb=175.00n sca=0 scb=0 scc=0
+ends sram_cell
+// End of subcircuit definition.
+
+// Library name: tsmcN65
+// Cell name: inv
+// View name: schematic
+subckt inv G Gb IN OUT P Pb
+parameters pl=60n pw=200n pf=1 psd=200n psa=175n psb=175n nl=60n nw=200n \
+        nf=1 nsd=200n nsa=175n nsb=175n
+    PM1 (OUT IN P Pb) pch l=pl w=pw*pf m=1 nf=pf sd=psd \
+        ad=((pf-int(pf/2)*2)*(1.75e-07+((pf-1)*2e-07)/2+0)+(pf+1-int((pf+1)/2)*2)*((pf/2)*2e-07))*pw \
+        as=((pf-int(pf/2)*2)*(1.75e-07+((pf-1)*2e-07)/2+0)+(pf+1-int((pf+1)/2)*2)*(1.75e-07+1.75e-07+(pf/2-1)*2e-07+0+0))*pw \
+        pd=(pf-int(pf/2)*2)*((1.75e-07+((pf-1)*2e-07)/2+0)*2+(pf+1)*pw)+(pf+1-int((pf+1)/2)*2)*(((pf/2)*2e-07)*2+pf*pw) \
+        ps=(pf-int(pf/2)*2)*((1.75e-07+((pf-1)*2e-07)/2+0)*2+(pf+1)*pw)+(pf+1-int((pf+1)/2)*2)*((1.75e-07+1.75e-07+(pf/2-1)*2e-07+0+0)*2+(pf+2)*pw) \
+        nrd=(pf-int(pf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(pf-1))/pw)+(pf+1-int((pf+1)/2)*2)*(1e-07/pf/pw) \
+        nrs=(pf-int(pf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(pf-1))/pw)+(pf+1-int((pf+1)/2)*2)*(1e-07*1e-07*1e-07/(1e-07*1e-07*(pf-2)+1e-07*(1e-07+1e-07))/pw) \
+        sa=psa sb=psb sca=0 scb=0 scc=0
+    NM1 (OUT IN G Gb) nch l=nl w=nw*nf m=1 nf=nf sd=nsd \
+        ad=((nf-int(nf/2)*2)*(1.75e-07+((nf-1)*2e-07)/2+0)+(nf+1-int((nf+1)/2)*2)*((nf/2)*2e-07))*nw \
+        as=((nf-int(nf/2)*2)*(1.75e-07+((nf-1)*2e-07)/2+0)+(nf+1-int((nf+1)/2)*2)*(1.75e-07+1.75e-07+(nf/2-1)*2e-07+0+0))*nw \
+        pd=(nf-int(nf/2)*2)*((1.75e-07+((nf-1)*2e-07)/2+0)*2+(nf+1)*nw)+(nf+1-int((nf+1)/2)*2)*(((nf/2)*2e-07)*2+nf*nw) \
+        ps=(nf-int(nf/2)*2)*((1.75e-07+((nf-1)*2e-07)/2+0)*2+(nf+1)*nw)+(nf+1-int((nf+1)/2)*2)*((1.75e-07+1.75e-07+(nf/2-1)*2e-07+0+0)*2+(nf+2)*nw) \
+        nrd=(nf-int(nf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(nf-1))/nw)+(nf+1-int((nf+1)/2)*2)*(1e-07/nf/nw) \
+        nrs=(nf-int(nf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(nf-1))/nw)+(nf+1-int((nf+1)/2)*2)*(1e-07*1e-07*1e-07/(1e-07*1e-07*(nf-2)+1e-07*(1e-07+1e-07))/nw) \
+        sa=nsa sb=nsb sca=0 scb=0 scc=0
+ends inv
+// End of subcircuit definition.
+
+// Library name: datn
+// Cell name: RWL_driver
+// View name: schematic
+subckt RWL_driver RWL0 RWL1 RWLB_N RWLB_P RWL_N RWL_P VDD VSS
+    I3 (VSS VSS RWLB1 RWLI1 VDD VDD) inv m=1 pl=60n pw=1u pf=2 psd=200n \
+        psa=175.00n psb=175.00n nl=60n nw=1u nf=2 nsd=200n nsa=175.00n \
+        nsb=175.00n
+    I2 (VSS VSS RWL1 RWLB1 VDD VDD) inv m=1 pl=60n pw=800n pf=1 psd=200n \
+        psa=175.00n psb=175.00n nl=60n nw=800n nf=1 nsd=200n nsa=175.00n \
+        nsb=175.00n
+    I1 (VSS VSS RWLB0 RWLI0 VDD VDD) inv m=1 pl=60n pw=1u pf=2 psd=200n \
+        psa=175.00n psb=175.00n nl=60n nw=1u nf=2 nsd=200n nsa=175.00n \
+        nsb=175.00n
+    I0 (VSS VSS RWL0 RWLB0 VDD VDD) inv m=1 pl=60n pw=800n pf=1 psd=200n \
+        psa=175.00n psb=175.00n nl=60n nw=800n nf=1 nsd=200n nsa=175.00n \
+        nsb=175.00n
+    M10 (RWLB_N RWLB1 VDD VDD) pch l=60n w=800n m=1 nf=1 sd=200n \
+        ad=1.4e-13 as=1.4e-13 pd=1.95u ps=1.95u nrd=0.125 nrs=0.125 \
+        sa=175.00n sb=175.00n sca=0 scb=0 scc=0
+    M12 (RWL_N RWLI0 VDD VDD) pch l=60n w=800n m=1 nf=1 sd=200n ad=1.4e-13 \
+        as=1.4e-13 pd=1.95u ps=1.95u nrd=0.125 nrs=0.125 sa=175.00n \
+        sb=175.00n sca=0 scb=0 scc=0
+    M8 (RWLB_P RWLI1 VDD VDD) pch l=60n w=800n m=1 nf=1 sd=200n ad=1.4e-13 \
+        as=1.4e-13 pd=1.95u ps=1.95u nrd=0.125 nrs=0.125 sa=175.00n \
+        sb=175.00n sca=0 scb=0 scc=0
+    M0 (RWL_P RWLB0 VDD VDD) pch l=60n w=800n m=1 nf=1 sd=200n ad=1.4e-13 \
+        as=1.4e-13 pd=1.95u ps=1.95u nrd=0.125 nrs=0.125 sa=175.00n \
+        sb=175.00n sca=0 scb=0 scc=0
+    M11 (RWLB_N RWLB1 VSS VSS) nch l=60n w=800n m=1 nf=1 sd=200n \
+        ad=1.4e-13 as=1.4e-13 pd=1.95u ps=1.95u nrd=0.125 nrs=0.125 \
+        sa=175.00n sb=175.00n sca=0 scb=0 scc=0
+    M13 (RWL_N RWLI0 VSS VSS) nch l=60n w=800n m=1 nf=1 sd=200n ad=1.4e-13 \
+        as=1.4e-13 pd=1.95u ps=1.95u nrd=0.125 nrs=0.125 sa=175.00n \
+        sb=175.00n sca=0 scb=0 scc=0
+    M9 (RWLB_P RWLI1 VSS VSS) nch l=60n w=800n m=1 nf=1 sd=200n ad=1.4e-13 \
+        as=1.4e-13 pd=1.95u ps=1.95u nrd=0.125 nrs=0.125 sa=175.00n \
+        sb=175.00n sca=0 scb=0 scc=0
+    M1 (RWL_P RWLB0 VSS VSS) nch l=60n w=800n m=1 nf=1 sd=200n ad=1.4e-13 \
+        as=1.4e-13 pd=1.95u ps=1.95u nrd=0.125 nrs=0.125 sa=175.00n \
+        sb=175.00n sca=0 scb=0 scc=0
+ends RWL_driver
+// End of subcircuit definition.
+
+// Library name: tsmcN65
+// Cell name: nand3
+// View name: schematic
+subckt nand3 A B C G Gb P Pb Y
+parameters pl=60n pw=200n pf=1 psd=200n psa=175n psb=175n nl=60n nw=200n \
+        nf=1 nsd=200n nsa=175n nsb=175n
+    M0 (Y B P Pb) pch l=pl w=pw*pf m=1 nf=pf sd=psd \
+        ad=((pf-int(pf/2)*2)*(1.75e-07+((pf-1)*2e-07)/2+0)+(pf+1-int((pf+1)/2)*2)*((pf/2)*2e-07))*pw \
+        as=((pf-int(pf/2)*2)*(1.75e-07+((pf-1)*2e-07)/2+0)+(pf+1-int((pf+1)/2)*2)*(1.75e-07+1.75e-07+(pf/2-1)*2e-07+0+0))*pw \
+        pd=(pf-int(pf/2)*2)*((1.75e-07+((pf-1)*2e-07)/2+0)*2+(pf+1)*pw)+(pf+1-int((pf+1)/2)*2)*(((pf/2)*2e-07)*2+pf*pw) \
+        ps=(pf-int(pf/2)*2)*((1.75e-07+((pf-1)*2e-07)/2+0)*2+(pf+1)*pw)+(pf+1-int((pf+1)/2)*2)*((1.75e-07+1.75e-07+(pf/2-1)*2e-07+0+0)*2+(pf+2)*pw) \
+        nrd=(pf-int(pf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(pf-1))/pw)+(pf+1-int((pf+1)/2)*2)*(1e-07/pf/pw) \
+        nrs=(pf-int(pf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(pf-1))/pw)+(pf+1-int((pf+1)/2)*2)*(1e-07*1e-07*1e-07/(1e-07*1e-07*(pf-2)+1e-07*(1e-07+1e-07))/pw) \
+        sa=psa sb=psb sca=0 scb=0 scc=0
+    M1 (Y C P Pb) pch l=pl w=pw*pf m=1 nf=pf sd=psd \
+        ad=((pf-int(pf/2)*2)*(1.75e-07+((pf-1)*2e-07)/2+0)+(pf+1-int((pf+1)/2)*2)*((pf/2)*2e-07))*pw \
+        as=((pf-int(pf/2)*2)*(1.75e-07+((pf-1)*2e-07)/2+0)+(pf+1-int((pf+1)/2)*2)*(1.75e-07+1.75e-07+(pf/2-1)*2e-07+0+0))*pw \
+        pd=(pf-int(pf/2)*2)*((1.75e-07+((pf-1)*2e-07)/2+0)*2+(pf+1)*pw)+(pf+1-int((pf+1)/2)*2)*(((pf/2)*2e-07)*2+pf*pw) \
+        ps=(pf-int(pf/2)*2)*((1.75e-07+((pf-1)*2e-07)/2+0)*2+(pf+1)*pw)+(pf+1-int((pf+1)/2)*2)*((1.75e-07+1.75e-07+(pf/2-1)*2e-07+0+0)*2+(pf+2)*pw) \
+        nrd=(pf-int(pf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(pf-1))/pw)+(pf+1-int((pf+1)/2)*2)*(1e-07/pf/pw) \
+        nrs=(pf-int(pf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(pf-1))/pw)+(pf+1-int((pf+1)/2)*2)*(1e-07*1e-07*1e-07/(1e-07*1e-07*(pf-2)+1e-07*(1e-07+1e-07))/pw) \
+        sa=psa sb=psb sca=0 scb=0 scc=0
+    PM1 (Y A P Pb) pch l=pl w=pw*pf m=1 nf=pf sd=psd \
+        ad=((pf-int(pf/2)*2)*(1.75e-07+((pf-1)*2e-07)/2+0)+(pf+1-int((pf+1)/2)*2)*((pf/2)*2e-07))*pw \
+        as=((pf-int(pf/2)*2)*(1.75e-07+((pf-1)*2e-07)/2+0)+(pf+1-int((pf+1)/2)*2)*(1.75e-07+1.75e-07+(pf/2-1)*2e-07+0+0))*pw \
+        pd=(pf-int(pf/2)*2)*((1.75e-07+((pf-1)*2e-07)/2+0)*2+(pf+1)*pw)+(pf+1-int((pf+1)/2)*2)*(((pf/2)*2e-07)*2+pf*pw) \
+        ps=(pf-int(pf/2)*2)*((1.75e-07+((pf-1)*2e-07)/2+0)*2+(pf+1)*pw)+(pf+1-int((pf+1)/2)*2)*((1.75e-07+1.75e-07+(pf/2-1)*2e-07+0+0)*2+(pf+2)*pw) \
+        nrd=(pf-int(pf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(pf-1))/pw)+(pf+1-int((pf+1)/2)*2)*(1e-07/pf/pw) \
+        nrs=(pf-int(pf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(pf-1))/pw)+(pf+1-int((pf+1)/2)*2)*(1e-07*1e-07*1e-07/(1e-07*1e-07*(pf-2)+1e-07*(1e-07+1e-07))/pw) \
+        sa=psa sb=psb sca=0 scb=0 scc=0
+    NM1 (Y A net25 Gb) nch l=nl w=nw*nf m=1 nf=nf sd=nsd \
+        ad=((nf-int(nf/2)*2)*(1.75e-07+((nf-1)*2e-07)/2+0)+(nf+1-int((nf+1)/2)*2)*((nf/2)*2e-07))*nw \
+        as=((nf-int(nf/2)*2)*(1.75e-07+((nf-1)*2e-07)/2+0)+(nf+1-int((nf+1)/2)*2)*(1.75e-07+1.75e-07+(nf/2-1)*2e-07+0+0))*nw \
+        pd=(nf-int(nf/2)*2)*((1.75e-07+((nf-1)*2e-07)/2+0)*2+(nf+1)*nw)+(nf+1-int((nf+1)/2)*2)*(((nf/2)*2e-07)*2+nf*nw) \
+        ps=(nf-int(nf/2)*2)*((1.75e-07+((nf-1)*2e-07)/2+0)*2+(nf+1)*nw)+(nf+1-int((nf+1)/2)*2)*((1.75e-07+1.75e-07+(nf/2-1)*2e-07+0+0)*2+(nf+2)*nw) \
+        nrd=(nf-int(nf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(nf-1))/nw)+(nf+1-int((nf+1)/2)*2)*(1e-07/nf/nw) \
+        nrs=(nf-int(nf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(nf-1))/nw)+(nf+1-int((nf+1)/2)*2)*(1e-07*1e-07*1e-07/(1e-07*1e-07*(nf-2)+1e-07*(1e-07+1e-07))/nw) \
+        sa=nsa sb=nsb sca=0 scb=0 scc=0
+    M2 (net25 B net21 Gb) nch l=nl w=nw*nf m=1 nf=nf sd=nsd \
+        ad=((nf-int(nf/2)*2)*(1.75e-07+((nf-1)*2e-07)/2+0)+(nf+1-int((nf+1)/2)*2)*((nf/2)*2e-07))*nw \
+        as=((nf-int(nf/2)*2)*(1.75e-07+((nf-1)*2e-07)/2+0)+(nf+1-int((nf+1)/2)*2)*(1.75e-07+1.75e-07+(nf/2-1)*2e-07+0+0))*nw \
+        pd=(nf-int(nf/2)*2)*((1.75e-07+((nf-1)*2e-07)/2+0)*2+(nf+1)*nw)+(nf+1-int((nf+1)/2)*2)*(((nf/2)*2e-07)*2+nf*nw) \
+        ps=(nf-int(nf/2)*2)*((1.75e-07+((nf-1)*2e-07)/2+0)*2+(nf+1)*nw)+(nf+1-int((nf+1)/2)*2)*((1.75e-07+1.75e-07+(nf/2-1)*2e-07+0+0)*2+(nf+2)*nw) \
+        nrd=(nf-int(nf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(nf-1))/nw)+(nf+1-int((nf+1)/2)*2)*(1e-07/nf/nw) \
+        nrs=(nf-int(nf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(nf-1))/nw)+(nf+1-int((nf+1)/2)*2)*(1e-07*1e-07*1e-07/(1e-07*1e-07*(nf-2)+1e-07*(1e-07+1e-07))/nw) \
+        sa=nsa sb=nsb sca=0 scb=0 scc=0
+    M3 (net21 C G Gb) nch l=nl w=nw*nf m=1 nf=nf sd=nsd \
+        ad=((nf-int(nf/2)*2)*(1.75e-07+((nf-1)*2e-07)/2+0)+(nf+1-int((nf+1)/2)*2)*((nf/2)*2e-07))*nw \
+        as=((nf-int(nf/2)*2)*(1.75e-07+((nf-1)*2e-07)/2+0)+(nf+1-int((nf+1)/2)*2)*(1.75e-07+1.75e-07+(nf/2-1)*2e-07+0+0))*nw \
+        pd=(nf-int(nf/2)*2)*((1.75e-07+((nf-1)*2e-07)/2+0)*2+(nf+1)*nw)+(nf+1-int((nf+1)/2)*2)*(((nf/2)*2e-07)*2+nf*nw) \
+        ps=(nf-int(nf/2)*2)*((1.75e-07+((nf-1)*2e-07)/2+0)*2+(nf+1)*nw)+(nf+1-int((nf+1)/2)*2)*((1.75e-07+1.75e-07+(nf/2-1)*2e-07+0+0)*2+(nf+2)*nw) \
+        nrd=(nf-int(nf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(nf-1))/nw)+(nf+1-int((nf+1)/2)*2)*(1e-07/nf/nw) \
+        nrs=(nf-int(nf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(nf-1))/nw)+(nf+1-int((nf+1)/2)*2)*(1e-07*1e-07*1e-07/(1e-07*1e-07*(nf-2)+1e-07*(1e-07+1e-07))/nw) \
+        sa=nsa sb=nsb sca=0 scb=0 scc=0
+ends nand3
+// End of subcircuit definition.
+
+// Library name: tsmcN65
+// Cell name: nor3
+// View name: schematic
+subckt nor3 A B C G Gb P Pb Y
+parameters pl=60n pw=200n pf=1 psd=200n psa=175n psb=175n nl=60n nw=200n \
+        nf=1 nsd=200n nsa=175n nsb=175n
+    M0 (net16 B net12 Pb) pch l=pl w=pw*pf m=1 nf=pf sd=psd \
+        ad=((pf-int(pf/2)*2)*(1.75e-07+((pf-1)*2e-07)/2+0)+(pf+1-int((pf+1)/2)*2)*((pf/2)*2e-07))*pw \
+        as=((pf-int(pf/2)*2)*(1.75e-07+((pf-1)*2e-07)/2+0)+(pf+1-int((pf+1)/2)*2)*(1.75e-07+1.75e-07+(pf/2-1)*2e-07+0+0))*pw \
+        pd=(pf-int(pf/2)*2)*((1.75e-07+((pf-1)*2e-07)/2+0)*2+(pf+1)*pw)+(pf+1-int((pf+1)/2)*2)*(((pf/2)*2e-07)*2+pf*pw) \
+        ps=(pf-int(pf/2)*2)*((1.75e-07+((pf-1)*2e-07)/2+0)*2+(pf+1)*pw)+(pf+1-int((pf+1)/2)*2)*((1.75e-07+1.75e-07+(pf/2-1)*2e-07+0+0)*2+(pf+2)*pw) \
+        nrd=(pf-int(pf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(pf-1))/pw)+(pf+1-int((pf+1)/2)*2)*(1e-07/pf/pw) \
+        nrs=(pf-int(pf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(pf-1))/pw)+(pf+1-int((pf+1)/2)*2)*(1e-07*1e-07*1e-07/(1e-07*1e-07*(pf-2)+1e-07*(1e-07+1e-07))/pw) \
+        sa=psa sb=psb sca=0 scb=0 scc=0
+    PM1 (net12 A P Pb) pch l=pl w=pw*pf m=1 nf=pf sd=psd \
+        ad=((pf-int(pf/2)*2)*(1.75e-07+((pf-1)*2e-07)/2+0)+(pf+1-int((pf+1)/2)*2)*((pf/2)*2e-07))*pw \
+        as=((pf-int(pf/2)*2)*(1.75e-07+((pf-1)*2e-07)/2+0)+(pf+1-int((pf+1)/2)*2)*(1.75e-07+1.75e-07+(pf/2-1)*2e-07+0+0))*pw \
+        pd=(pf-int(pf/2)*2)*((1.75e-07+((pf-1)*2e-07)/2+0)*2+(pf+1)*pw)+(pf+1-int((pf+1)/2)*2)*(((pf/2)*2e-07)*2+pf*pw) \
+        ps=(pf-int(pf/2)*2)*((1.75e-07+((pf-1)*2e-07)/2+0)*2+(pf+1)*pw)+(pf+1-int((pf+1)/2)*2)*((1.75e-07+1.75e-07+(pf/2-1)*2e-07+0+0)*2+(pf+2)*pw) \
+        nrd=(pf-int(pf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(pf-1))/pw)+(pf+1-int((pf+1)/2)*2)*(1e-07/pf/pw) \
+        nrs=(pf-int(pf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(pf-1))/pw)+(pf+1-int((pf+1)/2)*2)*(1e-07*1e-07*1e-07/(1e-07*1e-07*(pf-2)+1e-07*(1e-07+1e-07))/pw) \
+        sa=psa sb=psb sca=0 scb=0 scc=0
+    M1 (Y C net16 Pb) pch l=pl w=pw*pf m=1 nf=pf sd=psd \
+        ad=((pf-int(pf/2)*2)*(1.75e-07+((pf-1)*2e-07)/2+0)+(pf+1-int((pf+1)/2)*2)*((pf/2)*2e-07))*pw \
+        as=((pf-int(pf/2)*2)*(1.75e-07+((pf-1)*2e-07)/2+0)+(pf+1-int((pf+1)/2)*2)*(1.75e-07+1.75e-07+(pf/2-1)*2e-07+0+0))*pw \
+        pd=(pf-int(pf/2)*2)*((1.75e-07+((pf-1)*2e-07)/2+0)*2+(pf+1)*pw)+(pf+1-int((pf+1)/2)*2)*(((pf/2)*2e-07)*2+pf*pw) \
+        ps=(pf-int(pf/2)*2)*((1.75e-07+((pf-1)*2e-07)/2+0)*2+(pf+1)*pw)+(pf+1-int((pf+1)/2)*2)*((1.75e-07+1.75e-07+(pf/2-1)*2e-07+0+0)*2+(pf+2)*pw) \
+        nrd=(pf-int(pf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(pf-1))/pw)+(pf+1-int((pf+1)/2)*2)*(1e-07/pf/pw) \
+        nrs=(pf-int(pf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(pf-1))/pw)+(pf+1-int((pf+1)/2)*2)*(1e-07*1e-07*1e-07/(1e-07*1e-07*(pf-2)+1e-07*(1e-07+1e-07))/pw) \
+        sa=psa sb=psb sca=0 scb=0 scc=0
+    NM1 (Y B G Gb) nch l=nl w=nw*nf m=1 nf=nf sd=nsd \
+        ad=((nf-int(nf/2)*2)*(1.75e-07+((nf-1)*2e-07)/2+0)+(nf+1-int((nf+1)/2)*2)*((nf/2)*2e-07))*nw \
+        as=((nf-int(nf/2)*2)*(1.75e-07+((nf-1)*2e-07)/2+0)+(nf+1-int((nf+1)/2)*2)*(1.75e-07+1.75e-07+(nf/2-1)*2e-07+0+0))*nw \
+        pd=(nf-int(nf/2)*2)*((1.75e-07+((nf-1)*2e-07)/2+0)*2+(nf+1)*nw)+(nf+1-int((nf+1)/2)*2)*(((nf/2)*2e-07)*2+nf*nw) \
+        ps=(nf-int(nf/2)*2)*((1.75e-07+((nf-1)*2e-07)/2+0)*2+(nf+1)*nw)+(nf+1-int((nf+1)/2)*2)*((1.75e-07+1.75e-07+(nf/2-1)*2e-07+0+0)*2+(nf+2)*nw) \
+        nrd=(nf-int(nf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(nf-1))/nw)+(nf+1-int((nf+1)/2)*2)*(1e-07/nf/nw) \
+        nrs=(nf-int(nf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(nf-1))/nw)+(nf+1-int((nf+1)/2)*2)*(1e-07*1e-07*1e-07/(1e-07*1e-07*(nf-2)+1e-07*(1e-07+1e-07))/nw) \
+        sa=nsa sb=nsb sca=0 scb=0 scc=0
+    M3 (Y C G Gb) nch l=nl w=nw*nf m=1 nf=nf sd=nsd \
+        ad=((nf-int(nf/2)*2)*(1.75e-07+((nf-1)*2e-07)/2+0)+(nf+1-int((nf+1)/2)*2)*((nf/2)*2e-07))*nw \
+        as=((nf-int(nf/2)*2)*(1.75e-07+((nf-1)*2e-07)/2+0)+(nf+1-int((nf+1)/2)*2)*(1.75e-07+1.75e-07+(nf/2-1)*2e-07+0+0))*nw \
+        pd=(nf-int(nf/2)*2)*((1.75e-07+((nf-1)*2e-07)/2+0)*2+(nf+1)*nw)+(nf+1-int((nf+1)/2)*2)*(((nf/2)*2e-07)*2+nf*nw) \
+        ps=(nf-int(nf/2)*2)*((1.75e-07+((nf-1)*2e-07)/2+0)*2+(nf+1)*nw)+(nf+1-int((nf+1)/2)*2)*((1.75e-07+1.75e-07+(nf/2-1)*2e-07+0+0)*2+(nf+2)*nw) \
+        nrd=(nf-int(nf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(nf-1))/nw)+(nf+1-int((nf+1)/2)*2)*(1e-07/nf/nw) \
+        nrs=(nf-int(nf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(nf-1))/nw)+(nf+1-int((nf+1)/2)*2)*(1e-07*1e-07*1e-07/(1e-07*1e-07*(nf-2)+1e-07*(1e-07+1e-07))/nw) \
+        sa=nsa sb=nsb sca=0 scb=0 scc=0
+    M2 (Y A G Gb) nch l=nl w=nw*nf m=1 nf=nf sd=nsd \
+        ad=((nf-int(nf/2)*2)*(1.75e-07+((nf-1)*2e-07)/2+0)+(nf+1-int((nf+1)/2)*2)*((nf/2)*2e-07))*nw \
+        as=((nf-int(nf/2)*2)*(1.75e-07+((nf-1)*2e-07)/2+0)+(nf+1-int((nf+1)/2)*2)*(1.75e-07+1.75e-07+(nf/2-1)*2e-07+0+0))*nw \
+        pd=(nf-int(nf/2)*2)*((1.75e-07+((nf-1)*2e-07)/2+0)*2+(nf+1)*nw)+(nf+1-int((nf+1)/2)*2)*(((nf/2)*2e-07)*2+nf*nw) \
+        ps=(nf-int(nf/2)*2)*((1.75e-07+((nf-1)*2e-07)/2+0)*2+(nf+1)*nw)+(nf+1-int((nf+1)/2)*2)*((1.75e-07+1.75e-07+(nf/2-1)*2e-07+0+0)*2+(nf+2)*nw) \
+        nrd=(nf-int(nf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(nf-1))/nw)+(nf+1-int((nf+1)/2)*2)*(1e-07/nf/nw) \
+        nrs=(nf-int(nf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(nf-1))/nw)+(nf+1-int((nf+1)/2)*2)*(1e-07*1e-07*1e-07/(1e-07*1e-07*(nf-2)+1e-07*(1e-07+1e-07))/nw) \
+        sa=nsa sb=nsb sca=0 scb=0 scc=0
+ends nor3
+// End of subcircuit definition.
+
+// Library name: tsmcN65
+// Cell name: nand4
+// View name: schematic
+subckt nand4 A B C D G Gb P Pb Y
+parameters pl=60n pw=200n pf=1 psd=200n psa=175n psb=175n nl=60n nw=200n \
+        nf=1 nsd=200n nsa=175n nsb=175n
+    M1 (Y C P Pb) pch l=pl w=pw*pf m=1 nf=pf sd=psd \
+        ad=((pf-int(pf/2)*2)*(1.75e-07+((pf-1)*2e-07)/2+0)+(pf+1-int((pf+1)/2)*2)*((pf/2)*2e-07))*pw \
+        as=((pf-int(pf/2)*2)*(1.75e-07+((pf-1)*2e-07)/2+0)+(pf+1-int((pf+1)/2)*2)*(1.75e-07+1.75e-07+(pf/2-1)*2e-07+0+0))*pw \
+        pd=(pf-int(pf/2)*2)*((1.75e-07+((pf-1)*2e-07)/2+0)*2+(pf+1)*pw)+(pf+1-int((pf+1)/2)*2)*(((pf/2)*2e-07)*2+pf*pw) \
+        ps=(pf-int(pf/2)*2)*((1.75e-07+((pf-1)*2e-07)/2+0)*2+(pf+1)*pw)+(pf+1-int((pf+1)/2)*2)*((1.75e-07+1.75e-07+(pf/2-1)*2e-07+0+0)*2+(pf+2)*pw) \
+        nrd=(pf-int(pf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(pf-1))/pw)+(pf+1-int((pf+1)/2)*2)*(1e-07/pf/pw) \
+        nrs=(pf-int(pf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(pf-1))/pw)+(pf+1-int((pf+1)/2)*2)*(1e-07*1e-07*1e-07/(1e-07*1e-07*(pf-2)+1e-07*(1e-07+1e-07))/pw) \
+        sa=psa sb=psb sca=0 scb=0 scc=0
+    M2 (Y D P Pb) pch l=pl w=pw*pf m=1 nf=pf sd=psd \
+        ad=((pf-int(pf/2)*2)*(1.75e-07+((pf-1)*2e-07)/2+0)+(pf+1-int((pf+1)/2)*2)*((pf/2)*2e-07))*pw \
+        as=((pf-int(pf/2)*2)*(1.75e-07+((pf-1)*2e-07)/2+0)+(pf+1-int((pf+1)/2)*2)*(1.75e-07+1.75e-07+(pf/2-1)*2e-07+0+0))*pw \
+        pd=(pf-int(pf/2)*2)*((1.75e-07+((pf-1)*2e-07)/2+0)*2+(pf+1)*pw)+(pf+1-int((pf+1)/2)*2)*(((pf/2)*2e-07)*2+pf*pw) \
+        ps=(pf-int(pf/2)*2)*((1.75e-07+((pf-1)*2e-07)/2+0)*2+(pf+1)*pw)+(pf+1-int((pf+1)/2)*2)*((1.75e-07+1.75e-07+(pf/2-1)*2e-07+0+0)*2+(pf+2)*pw) \
+        nrd=(pf-int(pf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(pf-1))/pw)+(pf+1-int((pf+1)/2)*2)*(1e-07/pf/pw) \
+        nrs=(pf-int(pf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(pf-1))/pw)+(pf+1-int((pf+1)/2)*2)*(1e-07*1e-07*1e-07/(1e-07*1e-07*(pf-2)+1e-07*(1e-07+1e-07))/pw) \
+        sa=psa sb=psb sca=0 scb=0 scc=0
+    PM1 (Y A P Pb) pch l=pl w=pw*pf m=1 nf=pf sd=psd \
+        ad=((pf-int(pf/2)*2)*(1.75e-07+((pf-1)*2e-07)/2+0)+(pf+1-int((pf+1)/2)*2)*((pf/2)*2e-07))*pw \
+        as=((pf-int(pf/2)*2)*(1.75e-07+((pf-1)*2e-07)/2+0)+(pf+1-int((pf+1)/2)*2)*(1.75e-07+1.75e-07+(pf/2-1)*2e-07+0+0))*pw \
+        pd=(pf-int(pf/2)*2)*((1.75e-07+((pf-1)*2e-07)/2+0)*2+(pf+1)*pw)+(pf+1-int((pf+1)/2)*2)*(((pf/2)*2e-07)*2+pf*pw) \
+        ps=(pf-int(pf/2)*2)*((1.75e-07+((pf-1)*2e-07)/2+0)*2+(pf+1)*pw)+(pf+1-int((pf+1)/2)*2)*((1.75e-07+1.75e-07+(pf/2-1)*2e-07+0+0)*2+(pf+2)*pw) \
+        nrd=(pf-int(pf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(pf-1))/pw)+(pf+1-int((pf+1)/2)*2)*(1e-07/pf/pw) \
+        nrs=(pf-int(pf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(pf-1))/pw)+(pf+1-int((pf+1)/2)*2)*(1e-07*1e-07*1e-07/(1e-07*1e-07*(pf-2)+1e-07*(1e-07+1e-07))/pw) \
+        sa=psa sb=psb sca=0 scb=0 scc=0
+    M0 (Y B P Pb) pch l=pl w=pw*pf m=1 nf=pf sd=psd \
+        ad=((pf-int(pf/2)*2)*(1.75e-07+((pf-1)*2e-07)/2+0)+(pf+1-int((pf+1)/2)*2)*((pf/2)*2e-07))*pw \
+        as=((pf-int(pf/2)*2)*(1.75e-07+((pf-1)*2e-07)/2+0)+(pf+1-int((pf+1)/2)*2)*(1.75e-07+1.75e-07+(pf/2-1)*2e-07+0+0))*pw \
+        pd=(pf-int(pf/2)*2)*((1.75e-07+((pf-1)*2e-07)/2+0)*2+(pf+1)*pw)+(pf+1-int((pf+1)/2)*2)*(((pf/2)*2e-07)*2+pf*pw) \
+        ps=(pf-int(pf/2)*2)*((1.75e-07+((pf-1)*2e-07)/2+0)*2+(pf+1)*pw)+(pf+1-int((pf+1)/2)*2)*((1.75e-07+1.75e-07+(pf/2-1)*2e-07+0+0)*2+(pf+2)*pw) \
+        nrd=(pf-int(pf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(pf-1))/pw)+(pf+1-int((pf+1)/2)*2)*(1e-07/pf/pw) \
+        nrs=(pf-int(pf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(pf-1))/pw)+(pf+1-int((pf+1)/2)*2)*(1e-07*1e-07*1e-07/(1e-07*1e-07*(pf-2)+1e-07*(1e-07+1e-07))/pw) \
+        sa=psa sb=psb sca=0 scb=0 scc=0
+    NM1 (Y A net18 Gb) nch l=nl w=nw*nf m=1 nf=nf sd=nsd \
+        ad=((nf-int(nf/2)*2)*(1.75e-07+((nf-1)*2e-07)/2+0)+(nf+1-int((nf+1)/2)*2)*((nf/2)*2e-07))*nw \
+        as=((nf-int(nf/2)*2)*(1.75e-07+((nf-1)*2e-07)/2+0)+(nf+1-int((nf+1)/2)*2)*(1.75e-07+1.75e-07+(nf/2-1)*2e-07+0+0))*nw \
+        pd=(nf-int(nf/2)*2)*((1.75e-07+((nf-1)*2e-07)/2+0)*2+(nf+1)*nw)+(nf+1-int((nf+1)/2)*2)*(((nf/2)*2e-07)*2+nf*nw) \
+        ps=(nf-int(nf/2)*2)*((1.75e-07+((nf-1)*2e-07)/2+0)*2+(nf+1)*nw)+(nf+1-int((nf+1)/2)*2)*((1.75e-07+1.75e-07+(nf/2-1)*2e-07+0+0)*2+(nf+2)*nw) \
+        nrd=(nf-int(nf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(nf-1))/nw)+(nf+1-int((nf+1)/2)*2)*(1e-07/nf/nw) \
+        nrs=(nf-int(nf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(nf-1))/nw)+(nf+1-int((nf+1)/2)*2)*(1e-07*1e-07*1e-07/(1e-07*1e-07*(nf-2)+1e-07*(1e-07+1e-07))/nw) \
+        sa=nsa sb=nsb sca=0 scb=0 scc=0
+    M4 (net14 C net10 Gb) nch l=nl w=nw*nf m=1 nf=nf sd=nsd \
+        ad=((nf-int(nf/2)*2)*(1.75e-07+((nf-1)*2e-07)/2+0)+(nf+1-int((nf+1)/2)*2)*((nf/2)*2e-07))*nw \
+        as=((nf-int(nf/2)*2)*(1.75e-07+((nf-1)*2e-07)/2+0)+(nf+1-int((nf+1)/2)*2)*(1.75e-07+1.75e-07+(nf/2-1)*2e-07+0+0))*nw \
+        pd=(nf-int(nf/2)*2)*((1.75e-07+((nf-1)*2e-07)/2+0)*2+(nf+1)*nw)+(nf+1-int((nf+1)/2)*2)*(((nf/2)*2e-07)*2+nf*nw) \
+        ps=(nf-int(nf/2)*2)*((1.75e-07+((nf-1)*2e-07)/2+0)*2+(nf+1)*nw)+(nf+1-int((nf+1)/2)*2)*((1.75e-07+1.75e-07+(nf/2-1)*2e-07+0+0)*2+(nf+2)*nw) \
+        nrd=(nf-int(nf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(nf-1))/nw)+(nf+1-int((nf+1)/2)*2)*(1e-07/nf/nw) \
+        nrs=(nf-int(nf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(nf-1))/nw)+(nf+1-int((nf+1)/2)*2)*(1e-07*1e-07*1e-07/(1e-07*1e-07*(nf-2)+1e-07*(1e-07+1e-07))/nw) \
+        sa=nsa sb=nsb sca=0 scb=0 scc=0
+    M5 (net10 D G Gb) nch l=nl w=nw*nf m=1 nf=nf sd=nsd \
+        ad=((nf-int(nf/2)*2)*(1.75e-07+((nf-1)*2e-07)/2+0)+(nf+1-int((nf+1)/2)*2)*((nf/2)*2e-07))*nw \
+        as=((nf-int(nf/2)*2)*(1.75e-07+((nf-1)*2e-07)/2+0)+(nf+1-int((nf+1)/2)*2)*(1.75e-07+1.75e-07+(nf/2-1)*2e-07+0+0))*nw \
+        pd=(nf-int(nf/2)*2)*((1.75e-07+((nf-1)*2e-07)/2+0)*2+(nf+1)*nw)+(nf+1-int((nf+1)/2)*2)*(((nf/2)*2e-07)*2+nf*nw) \
+        ps=(nf-int(nf/2)*2)*((1.75e-07+((nf-1)*2e-07)/2+0)*2+(nf+1)*nw)+(nf+1-int((nf+1)/2)*2)*((1.75e-07+1.75e-07+(nf/2-1)*2e-07+0+0)*2+(nf+2)*nw) \
+        nrd=(nf-int(nf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(nf-1))/nw)+(nf+1-int((nf+1)/2)*2)*(1e-07/nf/nw) \
+        nrs=(nf-int(nf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(nf-1))/nw)+(nf+1-int((nf+1)/2)*2)*(1e-07*1e-07*1e-07/(1e-07*1e-07*(nf-2)+1e-07*(1e-07+1e-07))/nw) \
+        sa=nsa sb=nsb sca=0 scb=0 scc=0
+    M3 (net18 B net14 Gb) nch l=nl w=nw*nf m=1 nf=nf sd=nsd \
+        ad=((nf-int(nf/2)*2)*(1.75e-07+((nf-1)*2e-07)/2+0)+(nf+1-int((nf+1)/2)*2)*((nf/2)*2e-07))*nw \
+        as=((nf-int(nf/2)*2)*(1.75e-07+((nf-1)*2e-07)/2+0)+(nf+1-int((nf+1)/2)*2)*(1.75e-07+1.75e-07+(nf/2-1)*2e-07+0+0))*nw \
+        pd=(nf-int(nf/2)*2)*((1.75e-07+((nf-1)*2e-07)/2+0)*2+(nf+1)*nw)+(nf+1-int((nf+1)/2)*2)*(((nf/2)*2e-07)*2+nf*nw) \
+        ps=(nf-int(nf/2)*2)*((1.75e-07+((nf-1)*2e-07)/2+0)*2+(nf+1)*nw)+(nf+1-int((nf+1)/2)*2)*((1.75e-07+1.75e-07+(nf/2-1)*2e-07+0+0)*2+(nf+2)*nw) \
+        nrd=(nf-int(nf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(nf-1))/nw)+(nf+1-int((nf+1)/2)*2)*(1e-07/nf/nw) \
+        nrs=(nf-int(nf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(nf-1))/nw)+(nf+1-int((nf+1)/2)*2)*(1e-07*1e-07*1e-07/(1e-07*1e-07*(nf-2)+1e-07*(1e-07+1e-07))/nw) \
+        sa=nsa sb=nsb sca=0 scb=0 scc=0
+ends nand4
+// End of subcircuit definition.
+
+// Library name: tsmcN65
+// Cell name: nand2
+// View name: schematic
+subckt nand2 A B G Gb P Pb Y
+parameters pl=60n pw=200n pf=1 psd=200n psa=175n psb=175n nl=60n nw=200n \
+        nf=1 nsd=200n nsa=175n nsb=175n
+    PM1 (Y A P Pb) pch l=pl w=pw*pf m=1 nf=pf sd=psd \
+        ad=((pf-int(pf/2)*2)*(1.75e-07+((pf-1)*2e-07)/2+0)+(pf+1-int((pf+1)/2)*2)*((pf/2)*2e-07))*pw \
+        as=((pf-int(pf/2)*2)*(1.75e-07+((pf-1)*2e-07)/2+0)+(pf+1-int((pf+1)/2)*2)*(1.75e-07+1.75e-07+(pf/2-1)*2e-07+0+0))*pw \
+        pd=(pf-int(pf/2)*2)*((1.75e-07+((pf-1)*2e-07)/2+0)*2+(pf+1)*pw)+(pf+1-int((pf+1)/2)*2)*(((pf/2)*2e-07)*2+pf*pw) \
+        ps=(pf-int(pf/2)*2)*((1.75e-07+((pf-1)*2e-07)/2+0)*2+(pf+1)*pw)+(pf+1-int((pf+1)/2)*2)*((1.75e-07+1.75e-07+(pf/2-1)*2e-07+0+0)*2+(pf+2)*pw) \
+        nrd=(pf-int(pf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(pf-1))/pw)+(pf+1-int((pf+1)/2)*2)*(1e-07/pf/pw) \
+        nrs=(pf-int(pf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(pf-1))/pw)+(pf+1-int((pf+1)/2)*2)*(1e-07*1e-07*1e-07/(1e-07*1e-07*(pf-2)+1e-07*(1e-07+1e-07))/pw) \
+        sa=psa sb=psb sca=0 scb=0 scc=0
+    M2 (Y B P Pb) pch l=pl w=pw*pf m=1 nf=pf sd=psd \
+        ad=((pf-int(pf/2)*2)*(1.75e-07+((pf-1)*2e-07)/2+0)+(pf+1-int((pf+1)/2)*2)*((pf/2)*2e-07))*pw \
+        as=((pf-int(pf/2)*2)*(1.75e-07+((pf-1)*2e-07)/2+0)+(pf+1-int((pf+1)/2)*2)*(1.75e-07+1.75e-07+(pf/2-1)*2e-07+0+0))*pw \
+        pd=(pf-int(pf/2)*2)*((1.75e-07+((pf-1)*2e-07)/2+0)*2+(pf+1)*pw)+(pf+1-int((pf+1)/2)*2)*(((pf/2)*2e-07)*2+pf*pw) \
+        ps=(pf-int(pf/2)*2)*((1.75e-07+((pf-1)*2e-07)/2+0)*2+(pf+1)*pw)+(pf+1-int((pf+1)/2)*2)*((1.75e-07+1.75e-07+(pf/2-1)*2e-07+0+0)*2+(pf+2)*pw) \
+        nrd=(pf-int(pf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(pf-1))/pw)+(pf+1-int((pf+1)/2)*2)*(1e-07/pf/pw) \
+        nrs=(pf-int(pf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(pf-1))/pw)+(pf+1-int((pf+1)/2)*2)*(1e-07*1e-07*1e-07/(1e-07*1e-07*(pf-2)+1e-07*(1e-07+1e-07))/pw) \
+        sa=psa sb=psb sca=0 scb=0 scc=0
+    NM1 (Y A net16 Gb) nch l=nl w=nw*nf m=1 nf=nf sd=nsd \
+        ad=((nf-int(nf/2)*2)*(1.75e-07+((nf-1)*2e-07)/2+0)+(nf+1-int((nf+1)/2)*2)*((nf/2)*2e-07))*nw \
+        as=((nf-int(nf/2)*2)*(1.75e-07+((nf-1)*2e-07)/2+0)+(nf+1-int((nf+1)/2)*2)*(1.75e-07+1.75e-07+(nf/2-1)*2e-07+0+0))*nw \
+        pd=(nf-int(nf/2)*2)*((1.75e-07+((nf-1)*2e-07)/2+0)*2+(nf+1)*nw)+(nf+1-int((nf+1)/2)*2)*(((nf/2)*2e-07)*2+nf*nw) \
+        ps=(nf-int(nf/2)*2)*((1.75e-07+((nf-1)*2e-07)/2+0)*2+(nf+1)*nw)+(nf+1-int((nf+1)/2)*2)*((1.75e-07+1.75e-07+(nf/2-1)*2e-07+0+0)*2+(nf+2)*nw) \
+        nrd=(nf-int(nf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(nf-1))/nw)+(nf+1-int((nf+1)/2)*2)*(1e-07/nf/nw) \
+        nrs=(nf-int(nf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(nf-1))/nw)+(nf+1-int((nf+1)/2)*2)*(1e-07*1e-07*1e-07/(1e-07*1e-07*(nf-2)+1e-07*(1e-07+1e-07))/nw) \
+        sa=nsa sb=nsb sca=0 scb=0 scc=0
+    M0 (net16 B G Gb) nch l=nl w=nw*nf m=1 nf=nf sd=nsd \
+        ad=((nf-int(nf/2)*2)*(1.75e-07+((nf-1)*2e-07)/2+0)+(nf+1-int((nf+1)/2)*2)*((nf/2)*2e-07))*nw \
+        as=((nf-int(nf/2)*2)*(1.75e-07+((nf-1)*2e-07)/2+0)+(nf+1-int((nf+1)/2)*2)*(1.75e-07+1.75e-07+(nf/2-1)*2e-07+0+0))*nw \
+        pd=(nf-int(nf/2)*2)*((1.75e-07+((nf-1)*2e-07)/2+0)*2+(nf+1)*nw)+(nf+1-int((nf+1)/2)*2)*(((nf/2)*2e-07)*2+nf*nw) \
+        ps=(nf-int(nf/2)*2)*((1.75e-07+((nf-1)*2e-07)/2+0)*2+(nf+1)*nw)+(nf+1-int((nf+1)/2)*2)*((1.75e-07+1.75e-07+(nf/2-1)*2e-07+0+0)*2+(nf+2)*nw) \
+        nrd=(nf-int(nf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(nf-1))/nw)+(nf+1-int((nf+1)/2)*2)*(1e-07/nf/nw) \
+        nrs=(nf-int(nf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(nf-1))/nw)+(nf+1-int((nf+1)/2)*2)*(1e-07*1e-07*1e-07/(1e-07*1e-07*(nf-2)+1e-07*(1e-07+1e-07))/nw) \
+        sa=nsa sb=nsb sca=0 scb=0 scc=0
+ends nand2
+// End of subcircuit definition.
+
+// Library name: tsmcN65
+// Cell name: nor2
+// View name: schematic
+subckt nor2 A B G Gb P Pb Y
+parameters nl=60n nw=200n nf=1 nsd=200n nsa=175n nsb=175n pl=60n pw=200n \
+        pf=1 psd=200n psa=175n psb=175n
+    NM1 (Y B G Gb) nch l=nl w=nw*nf m=1 nf=nf sd=nsd \
+        ad=((nf-int(nf/2)*2)*(1.75e-07+((nf-1)*2e-07)/2+0)+(nf+1-int((nf+1)/2)*2)*((nf/2)*2e-07))*nw \
+        as=((nf-int(nf/2)*2)*(1.75e-07+((nf-1)*2e-07)/2+0)+(nf+1-int((nf+1)/2)*2)*(1.75e-07+1.75e-07+(nf/2-1)*2e-07+0+0))*nw \
+        pd=(nf-int(nf/2)*2)*((1.75e-07+((nf-1)*2e-07)/2+0)*2+(nf+1)*nw)+(nf+1-int((nf+1)/2)*2)*(((nf/2)*2e-07)*2+nf*nw) \
+        ps=(nf-int(nf/2)*2)*((1.75e-07+((nf-1)*2e-07)/2+0)*2+(nf+1)*nw)+(nf+1-int((nf+1)/2)*2)*((1.75e-07+1.75e-07+(nf/2-1)*2e-07+0+0)*2+(nf+2)*nw) \
+        nrd=(nf-int(nf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(nf-1))/nw)+(nf+1-int((nf+1)/2)*2)*(1e-07/nf/nw) \
+        nrs=(nf-int(nf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(nf-1))/nw)+(nf+1-int((nf+1)/2)*2)*(1e-07*1e-07*1e-07/(1e-07*1e-07*(nf-2)+1e-07*(1e-07+1e-07))/nw) \
+        sa=nsa sb=nsb sca=0 scb=0 scc=0
+    M1 (Y A G Gb) nch l=nl w=nw*nf m=1 nf=nf sd=nsd \
+        ad=((nf-int(nf/2)*2)*(1.75e-07+((nf-1)*2e-07)/2+0)+(nf+1-int((nf+1)/2)*2)*((nf/2)*2e-07))*nw \
+        as=((nf-int(nf/2)*2)*(1.75e-07+((nf-1)*2e-07)/2+0)+(nf+1-int((nf+1)/2)*2)*(1.75e-07+1.75e-07+(nf/2-1)*2e-07+0+0))*nw \
+        pd=(nf-int(nf/2)*2)*((1.75e-07+((nf-1)*2e-07)/2+0)*2+(nf+1)*nw)+(nf+1-int((nf+1)/2)*2)*(((nf/2)*2e-07)*2+nf*nw) \
+        ps=(nf-int(nf/2)*2)*((1.75e-07+((nf-1)*2e-07)/2+0)*2+(nf+1)*nw)+(nf+1-int((nf+1)/2)*2)*((1.75e-07+1.75e-07+(nf/2-1)*2e-07+0+0)*2+(nf+2)*nw) \
+        nrd=(nf-int(nf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(nf-1))/nw)+(nf+1-int((nf+1)/2)*2)*(1e-07/nf/nw) \
+        nrs=(nf-int(nf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(nf-1))/nw)+(nf+1-int((nf+1)/2)*2)*(1e-07*1e-07*1e-07/(1e-07*1e-07*(nf-2)+1e-07*(1e-07+1e-07))/nw) \
+        sa=nsa sb=nsb sca=0 scb=0 scc=0
+    M0 (Y B net15 Pb) pch l=pl w=pw*pf m=1 nf=pf sd=psd \
+        ad=((pf-int(pf/2)*2)*(1.75e-07+((pf-1)*2e-07)/2+0)+(pf+1-int((pf+1)/2)*2)*((pf/2)*2e-07))*pw \
+        as=((pf-int(pf/2)*2)*(1.75e-07+((pf-1)*2e-07)/2+0)+(pf+1-int((pf+1)/2)*2)*(1.75e-07+1.75e-07+(pf/2-1)*2e-07+0+0))*pw \
+        pd=(pf-int(pf/2)*2)*((1.75e-07+((pf-1)*2e-07)/2+0)*2+(pf+1)*pw)+(pf+1-int((pf+1)/2)*2)*(((pf/2)*2e-07)*2+pf*pw) \
+        ps=(pf-int(pf/2)*2)*((1.75e-07+((pf-1)*2e-07)/2+0)*2+(pf+1)*pw)+(pf+1-int((pf+1)/2)*2)*((1.75e-07+1.75e-07+(pf/2-1)*2e-07+0+0)*2+(pf+2)*pw) \
+        nrd=(pf-int(pf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(pf-1))/pw)+(pf+1-int((pf+1)/2)*2)*(1e-07/pf/pw) \
+        nrs=(pf-int(pf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(pf-1))/pw)+(pf+1-int((pf+1)/2)*2)*(1e-07*1e-07*1e-07/(1e-07*1e-07*(pf-2)+1e-07*(1e-07+1e-07))/pw) \
+        sa=psa sb=psb sca=0 scb=0 scc=0
+    PM1 (net15 A P Pb) pch l=pl w=pw*pf m=1 nf=pf sd=psd \
+        ad=((pf-int(pf/2)*2)*(1.75e-07+((pf-1)*2e-07)/2+0)+(pf+1-int((pf+1)/2)*2)*((pf/2)*2e-07))*pw \
+        as=((pf-int(pf/2)*2)*(1.75e-07+((pf-1)*2e-07)/2+0)+(pf+1-int((pf+1)/2)*2)*(1.75e-07+1.75e-07+(pf/2-1)*2e-07+0+0))*pw \
+        pd=(pf-int(pf/2)*2)*((1.75e-07+((pf-1)*2e-07)/2+0)*2+(pf+1)*pw)+(pf+1-int((pf+1)/2)*2)*(((pf/2)*2e-07)*2+pf*pw) \
+        ps=(pf-int(pf/2)*2)*((1.75e-07+((pf-1)*2e-07)/2+0)*2+(pf+1)*pw)+(pf+1-int((pf+1)/2)*2)*((1.75e-07+1.75e-07+(pf/2-1)*2e-07+0+0)*2+(pf+2)*pw) \
+        nrd=(pf-int(pf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(pf-1))/pw)+(pf+1-int((pf+1)/2)*2)*(1e-07/pf/pw) \
+        nrs=(pf-int(pf/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(pf-1))/pw)+(pf+1-int((pf+1)/2)*2)*(1e-07*1e-07*1e-07/(1e-07*1e-07*(pf-2)+1e-07*(1e-07+1e-07))/pw) \
+        sa=psa sb=psb sca=0 scb=0 scc=0
+ends nor2
+// End of subcircuit definition.
+
+// Library name: Flash_ADC
+// Cell name: prior_encode_83
+// View name: schematic
+subckt prior_encode_83 D0 D1 D2 D3 D4 D5 D6 D7 VDD VSS Y0 Y1 Y2
+    I47 (VSS VSS net073 net062 VDD VDD) inv m=1 pl=60n pw=200n pf=m_inv*2 \
+        psd=200n psa=175.00n psb=175.00n nl=60n nw=200n nf=m_inv nsd=200n \
+        nsa=175.00n nsb=175.00n
+    I28 (VSS VSS D2 net60 VDD VDD) inv m=1 pl=60n pw=200n pf=m_inv*2 \
+        psd=200n psa=175.00n psb=175.00n nl=60n nw=200n nf=m_inv nsd=200n \
+        nsa=175.00n nsb=175.00n
+    I27 (VSS VSS D5 net55 VDD VDD) inv m=1 pl=60n pw=200n pf=m_inv*2 \
+        psd=200n psa=175.00n psb=175.00n nl=60n nw=200n nf=m_inv nsd=200n \
+        nsa=175.00n nsb=175.00n
+    I26 (VSS VSS D4 net30 VDD VDD) inv m=1 pl=60n pw=200n pf=m_inv*2 \
+        psd=200n psa=175.00n psb=175.00n nl=60n nw=200n nf=m_inv nsd=200n \
+        nsa=175.00n nsb=175.00n
+    I43 (net075 D4 D5 VSS VSS VDD VDD net076) nand3 m=1 pl=60n pw=200n \
+        pf=m_nand3*2 psd=200n psa=175.00n psb=175.00n nl=60n nw=200n \
+        nf=m_nand3*3 nsd=200n nsa=175.00n nsb=175.00n
+    I42 (net076 D6 D7 VSS VSS VDD VDD Y1) nand3 m=1 pl=60n pw=200n \
+        pf=m_nand3*2 psd=200n psa=175.00n psb=175.00n nl=60n nw=200n \
+        nf=m_nand3*3 nsd=200n nsa=175.00n nsb=175.00n
+    I45 (net055 net054 net55 VSS VSS VDD VDD net073) nor3 m=1 pl=60n \
+        pw=200n pf=m_nor3*6 psd=200n psa=175.00n psb=175.00n nl=60n \
+        nw=200n nf=m_nor3 nsd=200n nsa=175.00n nsb=175.00n
+    I51 (D1 net60 net30 VSS VSS VDD VDD net055) nor3 m=1 pl=60n pw=200n \
+        pf=m_nor3*6 psd=200n psa=175.00n psb=175.00n nl=60n nw=200n \
+        nf=m_nor3 nsd=200n nsa=175.00n nsb=175.00n
+    I22 (D4 D5 D6 D7 VSS VSS VDD VDD Y2) nand4 m=1 pl=60n pw=200n \
+        pf=m_nand4*2 psd=200n psa=175.00n psb=175.00n nl=60n nw=200n \
+        nf=m_nand4*4 nsd=200n nsa=175.00n nsb=175.00n
+    I44 (D2 D3 VSS VSS VDD VDD net075) nand2 m=1 pl=60n pw=200n \
+        pf=m_nand2*2 psd=200n psa=175.00n psb=175.00n nl=60n nw=200n \
+        nf=m_nand2*2 nsd=200n nsa=175.00n nsb=175.00n
+    I49 (net062 D6 VSS VSS VDD VDD net074) nand2 m=1 pl=60n pw=200n \
+        pf=m_nand2*2 psd=200n psa=175.00n psb=175.00n nl=60n nw=200n \
+        nf=m_nand2*2 nsd=200n nsa=175.00n nsb=175.00n
+    I48 (net074 D7 VSS VSS VDD VDD Y0) nand2 m=1 pl=60n pw=200n \
+        pf=m_nand2*2 psd=200n psa=175.00n psb=175.00n nl=60n nw=200n \
+        nf=m_nand2*2 nsd=200n nsa=175.00n nsb=175.00n
+    I50 (D3 net30 VSS VSS VDD VDD net054) nor2 m=1 nl=60n nw=200n \
+        nf=m_nor2 nsd=200n nsa=175.00n nsb=175.00n pl=60n pw=200n \
+        pf=m_nor2*4 psd=200n psa=175.00n psb=175.00n
+ends prior_encode_83
+// End of subcircuit definition.
+
+// Library name: Flash_ADC
+// Cell name: prior_encode_164
+// View name: schematic
+subckt prior_encode_164 D\<0\> D\<10\> D\<11\> D\<12\> D\<13\> D\<14\> \
+        D\<15\> D\<1\> D\<2\> D\<3\> D\<4\> D\<5\> D\<6\> D\<7\> D\<8\> \
+        D\<9\> VDD VSS Y0 Y1 Y2 Y3
+    I22 (D\<0\> D\<1\> D\<2\> D\<3\> D\<4\> D\<5\> D\<6\> D\<7\> VDD VSS \
+        net65 net63 net61) prior_encode_83
+    I21 (D\<8\> D\<9\> D\<10\> D\<11\> D\<12\> D\<13\> D\<14\> D\<15\> VDD \
+        VSS net60 net64 net43) prior_encode_83
+    I27 (net64 net63 VSS VSS VDD VDD net83) nand2 m=1 pl=60n pw=200n \
+        pf=m_nand2*2 psd=200n psa=175.00n psb=175.00n nl=60n nw=200n \
+        nf=m_nand2*2 nsd=200n nsa=175.00n nsb=175.00n
+    I25 (net43 net61 VSS VSS VDD VDD net84) nand2 m=1 pl=60n pw=200n \
+        pf=m_nand2*2 psd=200n psa=175.00n psb=175.00n nl=60n nw=200n \
+        nf=m_nand2*2 nsd=200n nsa=175.00n nsb=175.00n
+    I23 (net43 net43 VSS VSS VDD VDD net85) nand2 m=1 pl=60n pw=200n \
+        pf=m_nand2*2 psd=200n psa=175.00n psb=175.00n nl=60n nw=200n \
+        nf=m_nand2*2 nsd=200n nsa=175.00n nsb=175.00n
+    I29 (net60 net65 VSS VSS VDD VDD net82) nand2 m=1 pl=60n pw=200n \
+        pf=m_nand2*2 psd=200n psa=175.00n psb=175.00n nl=60n nw=200n \
+        nf=m_nand2*2 nsd=200n nsa=175.00n nsb=175.00n
+    I28 (VSS VSS net83 Y1 VDD VDD) inv m=1 pl=60n pw=200n pf=m_inv*2 \
+        psd=200n psa=175.00n psb=175.00n nl=60n nw=200n nf=m_inv nsd=200n \
+        nsa=175.00n nsb=175.00n
+    I26 (VSS VSS net84 Y2 VDD VDD) inv m=1 pl=60n pw=200n pf=m_inv*2 \
+        psd=200n psa=175.00n psb=175.00n nl=60n nw=200n nf=m_inv nsd=200n \
+        nsa=175.00n nsb=175.00n
+    I24 (VSS VSS net85 Y3 VDD VDD) inv m=1 pl=60n pw=200n pf=m_inv*2 \
+        psd=200n psa=175.00n psb=175.00n nl=60n nw=200n nf=m_inv nsd=200n \
+        nsa=175.00n nsb=175.00n
+    I30 (VSS VSS net82 Y0 VDD VDD) inv m=1 pl=60n pw=200n pf=m_inv*2 \
+        psd=200n psa=175.00n psb=175.00n nl=60n nw=200n nf=m_inv nsd=200n \
+        nsa=175.00n nsb=175.00n
+ends prior_encode_164
+// End of subcircuit definition.
+
+// Library name: Flash_ADC
+// Cell name: dy_comp_v2
+// View name: schematic
+subckt dy_comp_v2 CLK INN INP OUTN OUTP VDD VSS
+    M8 (net28 CLK VSS VSS) nch l=60n w=200n m=m_comp*4 nf=1 sd=200n \
+        ad=3.5e-14 as=3.5e-14 pd=750.0n ps=750.0n nrd=0.5 nrs=0.5 \
+        sa=175.00n sb=175.00n sca=0 scb=0 scc=0
+    M3 (OUTN OUTP net27 VSS) nch l=60n w=200n m=m_comp nf=1 sd=200n \
+        ad=3.5e-14 as=3.5e-14 pd=750.0n ps=750.0n nrd=0.5 nrs=0.5 \
+        sa=175.00n sb=175.00n sca=0 scb=0 scc=0
+    M11 (net27 INN net28 net28) nch l=60n w=200n m=m_comp*2 nf=1 sd=200n \
+        ad=3.5e-14 as=3.5e-14 pd=750.0n ps=750.0n nrd=0.5 nrs=0.5 \
+        sa=175.00n sb=175.00n sca=0 scb=0 scc=0
+    M9 (OUTP OUTN net25 VSS) nch l=60n w=200n m=m_comp nf=1 sd=200n \
+        ad=3.5e-14 as=3.5e-14 pd=750.0n ps=750.0n nrd=0.5 nrs=0.5 \
+        sa=175.00n sb=175.00n sca=0 scb=0 scc=0
+    M10 (net25 INP net28 net28) nch l=60n w=200n m=m_comp*2 nf=1 sd=200n \
+        ad=3.5e-14 as=3.5e-14 pd=750.0n ps=750.0n nrd=0.5 nrs=0.5 \
+        sa=175.00n sb=175.00n sca=0 scb=0 scc=0
+    M14 (OUTP OUTN VDD VDD) pch l=60n w=200n m=m_comp nf=1 sd=200n \
+        ad=3.5e-14 as=3.5e-14 pd=750.0n ps=750.0n nrd=0.5 nrs=0.5 \
+        sa=175.00n sb=175.00n sca=0 scb=0 scc=0
+    M13 (OUTN CLK VDD VDD) pch l=60n w=2e-07*m_comp m=1 nf=m_comp sd=200n \
+        ad=((m_comp-int(m_comp/2)*2)*(1.75e-07+((m_comp-1)*2e-07)/2+0)+(m_comp+1-int((m_comp+1)/2)*2)*((m_comp/2)*2e-07))*2e-07 \
+        as=((m_comp-int(m_comp/2)*2)*(1.75e-07+((m_comp-1)*2e-07)/2+0)+(m_comp+1-int((m_comp+1)/2)*2)*(1.75e-07+1.75e-07+(m_comp/2-1)*2e-07+0+0))*2e-07 \
+        pd=(m_comp-int(m_comp/2)*2)*((1.75e-07+((m_comp-1)*2e-07)/2+0)*2+(m_comp+1)*2e-07)+(m_comp+1-int((m_comp+1)/2)*2)*(((m_comp/2)*2e-07)*2+m_comp*2e-07) \
+        ps=(m_comp-int(m_comp/2)*2)*((1.75e-07+((m_comp-1)*2e-07)/2+0)*2+(m_comp+1)*2e-07)+(m_comp+1-int((m_comp+1)/2)*2)*((1.75e-07+1.75e-07+(m_comp/2-1)*2e-07+0+0)*2+(m_comp+2)*2e-07) \
+        nrd=(m_comp-int(m_comp/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(m_comp-1))/2e-07)+(m_comp+1-int((m_comp+1)/2)*2)*(1e-07/m_comp/2e-07) \
+        nrs=(m_comp-int(m_comp/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(m_comp-1))/2e-07)+(m_comp+1-int((m_comp+1)/2)*2)*(1e-07*1e-07*1e-07/(1e-07*1e-07*(m_comp-2)+1e-07*(1e-07+1e-07))/2e-07) \
+        sa=175.00n sb=175.00n sca=0 scb=0 scc=0
+    M12 (OUTN OUTP VDD VDD) pch l=60n w=200n m=m_comp nf=1 sd=200n \
+        ad=3.5e-14 as=3.5e-14 pd=750.0n ps=750.0n nrd=0.5 nrs=0.5 \
+        sa=175.00n sb=175.00n sca=0 scb=0 scc=0
+    M4 (OUTP CLK VDD VDD) pch l=60n w=2e-07*m_comp m=1 nf=m_comp sd=200n \
+        ad=((m_comp-int(m_comp/2)*2)*(1.75e-07+((m_comp-1)*2e-07)/2+0)+(m_comp+1-int((m_comp+1)/2)*2)*((m_comp/2)*2e-07))*2e-07 \
+        as=((m_comp-int(m_comp/2)*2)*(1.75e-07+((m_comp-1)*2e-07)/2+0)+(m_comp+1-int((m_comp+1)/2)*2)*(1.75e-07+1.75e-07+(m_comp/2-1)*2e-07+0+0))*2e-07 \
+        pd=(m_comp-int(m_comp/2)*2)*((1.75e-07+((m_comp-1)*2e-07)/2+0)*2+(m_comp+1)*2e-07)+(m_comp+1-int((m_comp+1)/2)*2)*(((m_comp/2)*2e-07)*2+m_comp*2e-07) \
+        ps=(m_comp-int(m_comp/2)*2)*((1.75e-07+((m_comp-1)*2e-07)/2+0)*2+(m_comp+1)*2e-07)+(m_comp+1-int((m_comp+1)/2)*2)*((1.75e-07+1.75e-07+(m_comp/2-1)*2e-07+0+0)*2+(m_comp+2)*2e-07) \
+        nrd=(m_comp-int(m_comp/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(m_comp-1))/2e-07)+(m_comp+1-int((m_comp+1)/2)*2)*(1e-07/m_comp/2e-07) \
+        nrs=(m_comp-int(m_comp/2)*2)*(1e-07*1e-07/(1e-07+1e-07*(m_comp-1))/2e-07)+(m_comp+1-int((m_comp+1)/2)*2)*(1e-07*1e-07*1e-07/(1e-07*1e-07*(m_comp-2)+1e-07*(1e-07+1e-07))/2e-07) \
+        sa=175.00n sb=175.00n sca=0 scb=0 scc=0
+ends dy_comp_v2
+// End of subcircuit definition.
+
+// Library name: Flash_ADC
+// Cell name: Flash_ADC
+// View name: schematic
+subckt Flash_ADC A0 A1 A2 A3 CLK VDD VIN VREF VSS
+    I40 (D\<0\> D\<10\> D\<11\> D\<12\> D\<13\> D\<14\> D\<15\> D\<1\> \
+        D\<2\> D\<3\> D\<4\> D\<5\> D\<6\> D\<7\> D\<8\> D\<9\> VDD VSS A0 \
+        A1 A2 A3) prior_encode_164
+    R16 (net27 VSS) resistor r=1K
+    R15 (net28 net27) resistor r=1K
+    R14 (net29 net28) resistor r=1K
+    R13 (net30 net29) resistor r=1K
+    R12 (vref3 net30) resistor r=1K
+    R11 (net24 vref3) resistor r=1K
+    R10 (net25 net24) resistor r=1K
+    R9 (net26 net25) resistor r=1K
+    R8 (vref2 net26) resistor r=1K
+    R7 (net19 vref2) resistor r=1K
+    R6 (net20 net19) resistor r=1K
+    R5 (net21 net20) resistor r=1K
+    R4 (vref1 net21) resistor r=1K
+    R3 (net15 vref1) resistor r=1K
+    R2 (net16 net15) resistor r=1K
+    R1 (net17 net16) resistor r=1K
+    R0 (VREF net17) resistor r=1K
+    I27 (CLK vref1 VIN net072 D\<3\> VDD VSS) dy_comp_v2
+    I28 (CLK net21 VIN net068 D\<4\> VDD VSS) dy_comp_v2
+    I35 (CLK vref3 VIN net040 D\<11\> VDD VSS) dy_comp_v2
+    I36 (CLK net30 VIN net036 D\<12\> VDD VSS) dy_comp_v2
+    I26 (CLK net15 VIN net076 D\<2\> VDD VSS) dy_comp_v2
+    I29 (CLK net20 VIN net064 D\<5\> VDD VSS) dy_comp_v2
+    I34 (CLK net24 VIN net044 D\<10\> VDD VSS) dy_comp_v2
+    I37 (CLK net29 VIN net032 D\<13\> VDD VSS) dy_comp_v2
+    I25 (CLK net16 VIN net080 D\<1\> VDD VSS) dy_comp_v2
+    I30 (CLK net19 VIN net060 D\<6\> VDD VSS) dy_comp_v2
+    I33 (CLK net25 VIN net048 D\<9\> VDD VSS) dy_comp_v2
+    I38 (CLK net28 VIN net028 D\<14\> VDD VSS) dy_comp_v2
+    I24 (CLK net17 VIN net084 D\<0\> VDD VSS) dy_comp_v2
+    I31 (CLK vref2 VIN net056 D\<7\> VDD VSS) dy_comp_v2
+    I32 (CLK net26 VIN net052 D\<8\> VDD VSS) dy_comp_v2
+    I39 (CLK net27 VIN net024 D\<15\> VDD VSS) dy_comp_v2
+ends Flash_ADC
+// End of subcircuit definition.
+
+// Library name: datn
+// Cell name: testbench
+// View name: schematic
+I63 (VA_OUT REN RENB net533 net538 net535 net540 VDD VSS VDD VDD \
+        WWL\<63\>) sram_cell
+I62 (VA_OUT REN RENB net546 net551 net548 net553 VDD VSS VDD VDD \
+        WWL\<62\>) sram_cell
+I61 (VA_OUT REN RENB net562 net567 net564 net569 VDD VSS VDD VDD \
+        WWL\<61\>) sram_cell
+I60 (VA_OUT REN RENB net578 net583 net580 net585 VDD VSS VDD VDD \
+        WWL\<60\>) sram_cell
+I59 (VA_OUT REN RENB net594 net599 net596 net601 VDD VSS VDD VDD \
+        WWL\<59\>) sram_cell
+I58 (VA_OUT REN RENB net610 net615 net612 net617 VDD VSS VDD VDD \
+        WWL\<58\>) sram_cell
+I57 (VA_OUT REN RENB net626 net631 net628 net633 VDD VSS VDD VDD \
+        WWL\<57\>) sram_cell
+I56 (VA_OUT REN RENB net642 net647 net644 net649 VDD VSS VDD VDD \
+        WWL\<56\>) sram_cell
+I55 (VA_OUT REN RENB net658 net663 net660 net665 VDD VSS VDD VDD \
+        WWL\<55\>) sram_cell
+I54 (VA_OUT REN RENB net674 net679 net676 net681 VDD VSS VDD VDD \
+        WWL\<54\>) sram_cell
+I53 (VA_OUT REN RENB net690 net695 net692 net697 VDD VSS VDD VDD \
+        WWL\<53\>) sram_cell
+I52 (VA_OUT REN RENB net706 net711 net708 net713 VDD VSS VDD VDD \
+        WWL\<52\>) sram_cell
+I51 (VA_OUT REN RENB net722 net727 net724 net729 VDD VSS VDD VDD \
+        WWL\<51\>) sram_cell
+I50 (VA_OUT REN RENB net738 net743 net740 net745 VDD VSS VDD VDD \
+        WWL\<50\>) sram_cell
+I49 (VA_OUT REN RENB net754 net759 net756 net761 VDD VSS VDD VDD \
+        WWL\<49\>) sram_cell
+I48 (VA_OUT REN RENB net770 net775 net772 net777 VDD VSS VDD VDD \
+        WWL\<48\>) sram_cell
+I47 (VA_OUT REN RENB net786 net791 net788 net793 VDD VSS VDD VDD \
+        WWL\<47\>) sram_cell
+I46 (VA_OUT REN RENB net802 net807 net804 net809 VDD VSS VDD VDD \
+        WWL\<46\>) sram_cell
+I45 (VA_OUT REN RENB net818 net823 net820 net825 VDD VSS VDD VDD \
+        WWL\<45\>) sram_cell
+I44 (VA_OUT REN RENB net834 net839 net836 net841 VDD VSS VDD VDD \
+        WWL\<44\>) sram_cell
+I43 (VA_OUT REN RENB net850 net855 net852 net857 VDD VSS VDD VDD \
+        WWL\<43\>) sram_cell
+I42 (VA_OUT REN RENB net866 net871 net868 net873 VDD VSS VDD VDD \
+        WWL\<42\>) sram_cell
+I41 (VA_OUT REN RENB net882 net887 net884 net889 VDD VSS VDD VDD \
+        WWL\<41\>) sram_cell
+I40 (VA_OUT REN RENB net898 net903 net900 net905 VDD VSS VDD VDD \
+        WWL\<40\>) sram_cell
+I39 (VA_OUT REN RENB net914 net919 net916 net921 VDD VSS VDD VDD \
+        WWL\<39\>) sram_cell
+I38 (VA_OUT REN RENB net930 net935 net932 net937 VDD VSS VDD VDD \
+        WWL\<38\>) sram_cell
+I37 (VA_OUT REN RENB net946 net951 net948 net953 VDD VSS VDD VDD \
+        WWL\<37\>) sram_cell
+I36 (VA_OUT REN RENB net962 net967 net964 net969 VDD VSS VDD VDD \
+        WWL\<36\>) sram_cell
+I35 (VA_OUT REN RENB net978 net983 net980 net985 VDD VSS VDD VDD \
+        WWL\<35\>) sram_cell
+I34 (VA_OUT REN RENB net994 net999 net996 net1001 VDD VSS VDD VDD \
+        WWL\<34\>) sram_cell
+I33 (VA_OUT REN RENB net1010 net1015 net1012 net1017 VDD VSS VDD VDD \
+        WWL\<33\>) sram_cell
+I32 (VA_OUT REN RENB net1026 net1031 net1028 net1033 VDD VSS VDD VDD \
+        WWL\<32\>) sram_cell
+I31 (VA_OUT REN RENB net1042 net1047 net1044 net1049 VDD VSS VDD VDD \
+        WWL\<31\>) sram_cell
+I30 (VA_OUT REN RENB net1058 net1063 net1060 net1065 VDD VSS VDD VDD \
+        WWL\<30\>) sram_cell
+I29 (VA_OUT REN RENB net1074 net1079 net1076 net1081 VDD VSS VDD VDD \
+        WWL\<29\>) sram_cell
+I28 (VA_OUT REN RENB net1090 net1095 net1092 net1097 VDD VSS VDD VDD \
+        WWL\<28\>) sram_cell
+I27 (VA_OUT REN RENB net1106 net1111 net1108 net1113 VDD VSS VDD VDD \
+        WWL\<27\>) sram_cell
+I26 (VA_OUT REN RENB net1122 net1127 net1124 net1129 VDD VSS VDD VDD \
+        WWL\<26\>) sram_cell
+I25 (VA_OUT REN RENB net1138 net1143 net1140 net1145 VDD VSS VDD VDD \
+        WWL\<25\>) sram_cell
+I24 (VA_OUT REN RENB net1154 net1159 net1156 net1161 VDD VSS VDD VDD \
+        WWL\<24\>) sram_cell
+I23 (VA_OUT REN RENB net1170 net1175 net1172 net1177 VDD VSS VDD VDD \
+        WWL\<23\>) sram_cell
+I22 (VA_OUT REN RENB net1186 net1191 net1188 net1193 VDD VSS VDD VDD \
+        WWL\<22\>) sram_cell
+I21 (VA_OUT REN RENB net1202 net1207 net1204 net1209 VDD VSS VDD VDD \
+        WWL\<21\>) sram_cell
+I20 (VA_OUT REN RENB net1218 net1223 net1220 net1225 VDD VSS VDD VDD \
+        WWL\<20\>) sram_cell
+I19 (VA_OUT REN RENB net1234 net1239 net1236 net1241 VDD VSS VDD VDD \
+        WWL\<19\>) sram_cell
+I18 (VA_OUT REN RENB net1250 net1255 net1252 net1257 VDD VSS VDD VDD \
+        WWL\<18\>) sram_cell
+I17 (VA_OUT REN RENB net1266 net1271 net1268 net1273 VDD VSS VDD VDD \
+        WWL\<17\>) sram_cell
+I16 (VA_OUT REN RENB net1282 net1287 net1284 net1289 VDD VSS VDD VDD \
+        WWL\<16\>) sram_cell
+I15 (VA_OUT REN RENB net1298 net1303 net1300 net1305 VDD VSS VDD VDD \
+        WWL\<15\>) sram_cell
+I14 (VA_OUT REN RENB net1314 net1319 net1316 net1321 VDD VSS VDD VDD \
+        WWL\<14\>) sram_cell
+I13 (VA_OUT REN RENB net1330 net1335 net1332 net1337 VDD VSS VDD VDD \
+        WWL\<13\>) sram_cell
+I12 (VA_OUT REN RENB net1346 net1351 net1348 net1353 VDD VSS VDD VDD \
+        WWL\<12\>) sram_cell
+I11 (VA_OUT REN RENB net1362 net1367 net1364 net1369 VDD VSS VDD VDD \
+        WWL\<11\>) sram_cell
+I10 (VA_OUT REN RENB net1378 net1383 net1380 net1385 VDD VSS VDD VDD \
+        WWL\<10\>) sram_cell
+I9 (VA_OUT REN RENB net1394 net1399 net1396 net1401 VDD VSS VDD VDD \
+        WWL\<9\>) sram_cell
+I8 (VA_OUT REN RENB net1410 net1415 net1412 net1417 VDD VSS VDD VDD \
+        WWL\<8\>) sram_cell
+I7 (VA_OUT REN RENB net1426 net1431 net1428 net1433 VDD VSS VDD VDD \
+        WWL\<7\>) sram_cell
+I6 (VA_OUT REN RENB net1442 net1447 net1444 net1449 VDD VSS VDD VDD \
+        WWL\<6\>) sram_cell
+I5 (VA_OUT REN RENB net1458 net1463 net1460 net1465 VDD VSS VDD VDD \
+        WWL\<5\>) sram_cell
+I4 (VA_OUT REN RENB net1474 net1479 net1476 net1481 VDD VSS VDD VDD \
+        WWL\<4\>) sram_cell
+I3 (VA_OUT REN RENB net1490 net1495 net1492 net1497 VDD VSS VDD VDD \
+        WWL\<3\>) sram_cell
+I2 (VA_OUT REN RENB net1506 net1511 net1508 net1513 VDD VSS VDD VDD \
+        WWL\<2\>) sram_cell
+I1 (VA_OUT REN RENB net1522 net1527 net1524 net1529 VDD VSS VDD VDD \
+        WWL\<1\>) sram_cell
+I0 (VA_OUT REN RENB net1538 net1543 net1540 net1545 VDD VSS VDD VDD \
+        WWL\<0\>) sram_cell
+I127 (RWL0\<63\> RWL1\<63\> net533 net538 net535 net540 VDD VSS) \
+        RWL_driver
+I126 (RWL0\<62\> RWL1\<62\> net546 net551 net548 net553 VDD VSS) \
+        RWL_driver
+I125 (RWL0\<61\> RWL1\<61\> net562 net567 net564 net569 VDD VSS) \
+        RWL_driver
+I124 (RWL0\<60\> RWL1\<60\> net578 net583 net580 net585 VDD VSS) \
+        RWL_driver
+I123 (RWL0\<59\> RWL1\<59\> net594 net599 net596 net601 VDD VSS) \
+        RWL_driver
+I122 (RWL0\<58\> RWL1\<58\> net610 net615 net612 net617 VDD VSS) \
+        RWL_driver
+I121 (RWL0\<57\> RWL1\<57\> net626 net631 net628 net633 VDD VSS) \
+        RWL_driver
+I120 (RWL0\<56\> RWL1\<56\> net642 net647 net644 net649 VDD VSS) \
+        RWL_driver
+I119 (RWL0\<55\> RWL1\<55\> net658 net663 net660 net665 VDD VSS) \
+        RWL_driver
+I118 (RWL0\<54\> RWL1\<54\> net674 net679 net676 net681 VDD VSS) \
+        RWL_driver
+I117 (RWL0\<53\> RWL1\<53\> net690 net695 net692 net697 VDD VSS) \
+        RWL_driver
+I116 (RWL0\<52\> RWL1\<52\> net706 net711 net708 net713 VDD VSS) \
+        RWL_driver
+I115 (RWL0\<51\> RWL1\<51\> net722 net727 net724 net729 VDD VSS) \
+        RWL_driver
+I114 (RWL0\<50\> RWL1\<50\> net738 net743 net740 net745 VDD VSS) \
+        RWL_driver
+I113 (RWL0\<49\> RWL1\<49\> net754 net759 net756 net761 VDD VSS) \
+        RWL_driver
+I112 (RWL0\<48\> RWL1\<48\> net770 net775 net772 net777 VDD VSS) \
+        RWL_driver
+I111 (RWL0\<47\> RWL1\<47\> net786 net791 net788 net793 VDD VSS) \
+        RWL_driver
+I110 (RWL0\<46\> RWL1\<46\> net802 net807 net804 net809 VDD VSS) \
+        RWL_driver
+I109 (RWL0\<45\> RWL1\<45\> net818 net823 net820 net825 VDD VSS) \
+        RWL_driver
+I108 (RWL0\<44\> RWL1\<44\> net834 net839 net836 net841 VDD VSS) \
+        RWL_driver
+I107 (RWL0\<43\> RWL1\<43\> net850 net855 net852 net857 VDD VSS) \
+        RWL_driver
+I106 (RWL0\<42\> RWL1\<42\> net866 net871 net868 net873 VDD VSS) \
+        RWL_driver
+I105 (RWL0\<41\> RWL1\<41\> net882 net887 net884 net889 VDD VSS) \
+        RWL_driver
+I104 (RWL0\<40\> RWL1\<40\> net898 net903 net900 net905 VDD VSS) \
+        RWL_driver
+I103 (RWL0\<39\> RWL1\<39\> net914 net919 net916 net921 VDD VSS) \
+        RWL_driver
+I102 (RWL0\<38\> RWL1\<38\> net930 net935 net932 net937 VDD VSS) \
+        RWL_driver
+I101 (RWL0\<37\> RWL1\<37\> net946 net951 net948 net953 VDD VSS) \
+        RWL_driver
+I100 (RWL0\<36\> RWL1\<36\> net962 net967 net964 net969 VDD VSS) \
+        RWL_driver
+I99 (RWL0\<35\> RWL1\<35\> net978 net983 net980 net985 VDD VSS) RWL_driver
+I98 (RWL0\<34\> RWL1\<34\> net994 net999 net996 net1001 VDD VSS) \
+        RWL_driver
+I97 (RWL0\<33\> RWL1\<33\> net1010 net1015 net1012 net1017 VDD VSS) \
+        RWL_driver
+I96 (RWL0\<32\> RWL1\<32\> net1026 net1031 net1028 net1033 VDD VSS) \
+        RWL_driver
+I95 (RWL0\<31\> RWL1\<31\> net1042 net1047 net1044 net1049 VDD VSS) \
+        RWL_driver
+I94 (RWL0\<30\> RWL1\<30\> net1058 net1063 net1060 net1065 VDD VSS) \
+        RWL_driver
+I93 (RWL0\<29\> RWL1\<29\> net1074 net1079 net1076 net1081 VDD VSS) \
+        RWL_driver
+I92 (RWL0\<28\> RWL1\<28\> net1090 net1095 net1092 net1097 VDD VSS) \
+        RWL_driver
+I91 (RWL0\<27\> RWL1\<27\> net1106 net1111 net1108 net1113 VDD VSS) \
+        RWL_driver
+I90 (RWL0\<26\> RWL1\<26\> net1122 net1127 net1124 net1129 VDD VSS) \
+        RWL_driver
+I89 (RWL0\<25\> RWL1\<25\> net1138 net1143 net1140 net1145 VDD VSS) \
+        RWL_driver
+I88 (RWL0\<24\> RWL1\<24\> net1154 net1159 net1156 net1161 VDD VSS) \
+        RWL_driver
+I87 (RWL0\<23\> RWL1\<23\> net1170 net1175 net1172 net1177 VDD VSS) \
+        RWL_driver
+I86 (RWL0\<22\> RWL1\<22\> net1186 net1191 net1188 net1193 VDD VSS) \
+        RWL_driver
+I85 (RWL0\<21\> RWL1\<21\> net1202 net1207 net1204 net1209 VDD VSS) \
+        RWL_driver
+I84 (RWL0\<20\> RWL1\<20\> net1218 net1223 net1220 net1225 VDD VSS) \
+        RWL_driver
+I83 (RWL0\<19\> RWL1\<19\> net1234 net1239 net1236 net1241 VDD VSS) \
+        RWL_driver
+I82 (RWL0\<18\> RWL1\<18\> net1250 net1255 net1252 net1257 VDD VSS) \
+        RWL_driver
+I81 (RWL0\<17\> RWL1\<17\> net1266 net1271 net1268 net1273 VDD VSS) \
+        RWL_driver
+I80 (RWL0\<16\> RWL1\<16\> net1282 net1287 net1284 net1289 VDD VSS) \
+        RWL_driver
+I79 (RWL0\<15\> RWL1\<15\> net1298 net1303 net1300 net1305 VDD VSS) \
+        RWL_driver
+I78 (RWL0\<14\> RWL1\<14\> net1314 net1319 net1316 net1321 VDD VSS) \
+        RWL_driver
+I77 (RWL0\<13\> RWL1\<13\> net1330 net1335 net1332 net1337 VDD VSS) \
+        RWL_driver
+I76 (RWL0\<12\> RWL1\<12\> net1346 net1351 net1348 net1353 VDD VSS) \
+        RWL_driver
+I75 (RWL0\<11\> RWL1\<11\> net1362 net1367 net1364 net1369 VDD VSS) \
+        RWL_driver
+I74 (RWL0\<10\> RWL1\<10\> net1378 net1383 net1380 net1385 VDD VSS) \
+        RWL_driver
+I73 (RWL0\<9\> RWL1\<9\> net1394 net1399 net1396 net1401 VDD VSS) \
+        RWL_driver
+I72 (RWL0\<8\> RWL1\<8\> net1410 net1415 net1412 net1417 VDD VSS) \
+        RWL_driver
+I71 (RWL0\<7\> RWL1\<7\> net1426 net1431 net1428 net1433 VDD VSS) \
+        RWL_driver
+I70 (RWL0\<6\> RWL1\<6\> net1442 net1447 net1444 net1449 VDD VSS) \
+        RWL_driver
+I69 (RWL0\<5\> RWL1\<5\> net1458 net1463 net1460 net1465 VDD VSS) \
+        RWL_driver
+I68 (RWL0\<4\> RWL1\<4\> net1474 net1479 net1476 net1481 VDD VSS) \
+        RWL_driver
+I67 (RWL0\<3\> RWL1\<3\> net1490 net1495 net1492 net1497 VDD VSS) \
+        RWL_driver
+I66 (RWL0\<2\> RWL1\<2\> net1506 net1511 net1508 net1513 VDD VSS) \
+        RWL_driver
+I65 (RWL0\<1\> RWL1\<1\> net1522 net1527 net1524 net1529 VDD VSS) \
+        RWL_driver
+I64 (RWL0\<0\> RWL1\<0\> net1538 net1543 net1540 net1545 VDD VSS) \
+        RWL_driver
+ADC (VOUT\<0\> VOUT\<1\> VOUT\<2\> VOUT\<3\> CLK VDD VA_OUT VREF VSS) \
+        Flash_ADC
+I129 (VSS VSS REN RENB VDD VDD) inv m=1 pl=60n pw=200n pf=1 psd=200n \
+        psa=175n psb=175n nl=60n nw=200n nf=1 nsd=200n nsa=175n nsb=175n
+C0 (VA_OUT VSS) capacitor c=3.95f
+
+VSP	(VDD 0) vsource dc=VP type=dc 
+VVSS    (VSS 0) vsource dc=0 type=dc
+VREF	(VREF 0) vsource dc=VP type=dc
+VREN	(REN 0) vsource type=pulse val0=0 val1=VP period=30n delay=5n rise=1p fall=1p width=10n
+VCLK 	(CLK 0) vsource type=pulse val0=0 val1=VP period=35n delay=10n rise=1p fall=1p width=5n
+
+VRWL1_0 (RWL1\<0\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_0 (RWL0\<0\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_1 (RWL1\<1\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_1 (RWL0\<1\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_2 (RWL1\<2\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_2 (RWL0\<2\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_3 (RWL1\<3\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_3 (RWL0\<3\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_4 (RWL1\<4\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_4 (RWL0\<4\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_5 (RWL1\<5\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_5 (RWL0\<5\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_6 (RWL1\<6\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_6 (RWL0\<6\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_7 (RWL1\<7\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_7 (RWL0\<7\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_8 (RWL1\<8\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_8 (RWL0\<8\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_9 (RWL1\<9\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_9 (RWL0\<9\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_10 (RWL1\<10\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_10 (RWL0\<10\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_11 (RWL1\<11\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_11 (RWL0\<11\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_12 (RWL1\<12\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_12 (RWL0\<12\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_13 (RWL1\<13\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_13 (RWL0\<13\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_14 (RWL1\<14\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_14 (RWL0\<14\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_15 (RWL1\<15\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_15 (RWL0\<15\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_16 (RWL1\<16\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_16 (RWL0\<16\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_17 (RWL1\<17\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_17 (RWL0\<17\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_18 (RWL1\<18\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_18 (RWL0\<18\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_19 (RWL1\<19\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_19 (RWL0\<19\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_20 (RWL1\<20\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_20 (RWL0\<20\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_21 (RWL1\<21\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_21 (RWL0\<21\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_22 (RWL1\<22\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_22 (RWL0\<22\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_23 (RWL1\<23\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_23 (RWL0\<23\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_24 (RWL1\<24\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_24 (RWL0\<24\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_25 (RWL1\<25\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_25 (RWL0\<25\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_26 (RWL1\<26\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_26 (RWL0\<26\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_27 (RWL1\<27\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_27 (RWL0\<27\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_28 (RWL1\<28\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_28 (RWL0\<28\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_29 (RWL1\<29\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_29 (RWL0\<29\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_30 (RWL1\<30\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_30 (RWL0\<30\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_31 (RWL1\<31\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_31 (RWL0\<31\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_32 (RWL1\<32\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_32 (RWL0\<32\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_33 (RWL1\<33\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_33 (RWL0\<33\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_34 (RWL1\<34\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_34 (RWL0\<34\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_35 (RWL1\<35\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_35 (RWL0\<35\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_36 (RWL1\<36\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_36 (RWL0\<36\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_37 (RWL1\<37\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_37 (RWL0\<37\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_38 (RWL1\<38\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_38 (RWL0\<38\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_39 (RWL1\<39\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_39 (RWL0\<39\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_40 (RWL1\<40\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_40 (RWL0\<40\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_41 (RWL1\<41\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_41 (RWL0\<41\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_42 (RWL1\<42\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_42 (RWL0\<42\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_43 (RWL1\<43\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_43 (RWL0\<43\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_44 (RWL1\<44\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_44 (RWL0\<44\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_45 (RWL1\<45\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_45 (RWL0\<45\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_46 (RWL1\<46\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_46 (RWL0\<46\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_47 (RWL1\<47\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_47 (RWL0\<47\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_48 (RWL1\<48\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_48 (RWL0\<48\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_49 (RWL1\<49\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_49 (RWL0\<49\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_50 (RWL1\<50\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_50 (RWL0\<50\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_51 (RWL1\<51\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_51 (RWL0\<51\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_52 (RWL1\<52\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_52 (RWL0\<52\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_53 (RWL1\<53\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_53 (RWL0\<53\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_54 (RWL1\<54\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_54 (RWL0\<54\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_55 (RWL1\<55\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_55 (RWL0\<55\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_56 (RWL1\<56\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_56 (RWL0\<56\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_57 (RWL1\<57\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_57 (RWL0\<57\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_58 (RWL1\<58\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_58 (RWL0\<58\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_59 (RWL1\<59\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_59 (RWL0\<59\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_60 (RWL1\<60\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_60 (RWL0\<60\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_61 (RWL1\<61\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_61 (RWL0\<61\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_62 (RWL1\<62\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_62 (RWL0\<62\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VRWL1_63 (RWL1\<63\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+VRWL0_63 (RWL0\<63\> 0) vsource type=pulse val0=0 val1=VP period=20n delay=5n rise=1p fall=1p width=10n
+
+VWWL_0 (WWL\<0\> 0) vsource dc=0 type=dc
+VWWL_1 (WWL\<1\> 0) vsource dc=0 type=dc
+VWWL_2 (WWL\<2\> 0) vsource dc=0 type=dc
+VWWL_3 (WWL\<3\> 0) vsource dc=0 type=dc
+VWWL_4 (WWL\<4\> 0) vsource dc=0 type=dc
+VWWL_5 (WWL\<5\> 0) vsource dc=0 type=dc
+VWWL_6 (WWL\<6\> 0) vsource dc=0 type=dc
+VWWL_7 (WWL\<7\> 0) vsource dc=0 type=dc
+VWWL_8 (WWL\<8\> 0) vsource dc=0 type=dc
+VWWL_9 (WWL\<9\> 0) vsource dc=0 type=dc
+VWWL_10 (WWL\<10\> 0) vsource dc=0 type=dc
+VWWL_11 (WWL\<11\> 0) vsource dc=0 type=dc
+VWWL_12 (WWL\<12\> 0) vsource dc=0 type=dc
+VWWL_13 (WWL\<13\> 0) vsource dc=0 type=dc
+VWWL_14 (WWL\<14\> 0) vsource dc=0 type=dc
+VWWL_15 (WWL\<15\> 0) vsource dc=0 type=dc
+VWWL_16 (WWL\<16\> 0) vsource dc=0 type=dc
+VWWL_17 (WWL\<17\> 0) vsource dc=0 type=dc
+VWWL_18 (WWL\<18\> 0) vsource dc=0 type=dc
+VWWL_19 (WWL\<19\> 0) vsource dc=0 type=dc
+VWWL_20 (WWL\<20\> 0) vsource dc=0 type=dc
+VWWL_21 (WWL\<21\> 0) vsource dc=0 type=dc
+VWWL_22 (WWL\<22\> 0) vsource dc=0 type=dc
+VWWL_23 (WWL\<23\> 0) vsource dc=0 type=dc
+VWWL_24 (WWL\<24\> 0) vsource dc=0 type=dc
+VWWL_25 (WWL\<25\> 0) vsource dc=0 type=dc
+VWWL_26 (WWL\<26\> 0) vsource dc=0 type=dc
+VWWL_27 (WWL\<27\> 0) vsource dc=0 type=dc
+VWWL_28 (WWL\<28\> 0) vsource dc=0 type=dc
+VWWL_29 (WWL\<29\> 0) vsource dc=0 type=dc
+VWWL_30 (WWL\<30\> 0) vsource dc=0 type=dc
+VWWL_31 (WWL\<31\> 0) vsource dc=0 type=dc
+VWWL_32 (WWL\<32\> 0) vsource dc=0 type=dc
+VWWL_33 (WWL\<33\> 0) vsource dc=0 type=dc
+VWWL_34 (WWL\<34\> 0) vsource dc=0 type=dc
+VWWL_35 (WWL\<35\> 0) vsource dc=0 type=dc
+VWWL_36 (WWL\<36\> 0) vsource dc=0 type=dc
+VWWL_37 (WWL\<37\> 0) vsource dc=0 type=dc
+VWWL_38 (WWL\<38\> 0) vsource dc=0 type=dc
+VWWL_39 (WWL\<39\> 0) vsource dc=0 type=dc
+VWWL_40 (WWL\<40\> 0) vsource dc=0 type=dc
+VWWL_41 (WWL\<41\> 0) vsource dc=0 type=dc
+VWWL_42 (WWL\<42\> 0) vsource dc=0 type=dc
+VWWL_43 (WWL\<43\> 0) vsource dc=0 type=dc
+VWWL_44 (WWL\<44\> 0) vsource dc=0 type=dc
+VWWL_45 (WWL\<45\> 0) vsource dc=0 type=dc
+VWWL_46 (WWL\<46\> 0) vsource dc=0 type=dc
+VWWL_47 (WWL\<47\> 0) vsource dc=0 type=dc
+VWWL_48 (WWL\<48\> 0) vsource dc=0 type=dc
+VWWL_49 (WWL\<49\> 0) vsource dc=0 type=dc
+VWWL_50 (WWL\<50\> 0) vsource dc=0 type=dc
+VWWL_51 (WWL\<51\> 0) vsource dc=0 type=dc
+VWWL_52 (WWL\<52\> 0) vsource dc=0 type=dc
+VWWL_53 (WWL\<53\> 0) vsource dc=0 type=dc
+VWWL_54 (WWL\<54\> 0) vsource dc=0 type=dc
+VWWL_55 (WWL\<55\> 0) vsource dc=0 type=dc
+VWWL_56 (WWL\<56\> 0) vsource dc=0 type=dc
+VWWL_57 (WWL\<57\> 0) vsource dc=0 type=dc
+VWWL_58 (WWL\<58\> 0) vsource dc=0 type=dc
+VWWL_59 (WWL\<59\> 0) vsource dc=0 type=dc
+VWWL_60 (WWL\<60\> 0) vsource dc=0 type=dc
+VWWL_61 (WWL\<61\> 0) vsource dc=0 type=dc
+VWWL_62 (WWL\<62\> 0) vsource dc=0 type=dc
+VWWL_63 (WWL\<63\> 0) vsource dc=0 type=dc
